@@ -2,6 +2,11 @@
     <div class="login-container">
         <div class="login-image"></div>
         <div class="login-side-container">
+          <el-switch
+              v-model="value1"
+              :active-action-icon="Moon"
+              :inactive-action-icon="Sunny"
+          />
           <div class="login-side-wrapper">
             <div class="gt-logo-container">
               <img class="gt-logo-img" src="logo.png" alt="logo">
@@ -14,7 +19,9 @@
 </template>
 <script setup>
 import EasyForm from "../../components/EasyForm/EasyForm.vue";
+import { Moon, Sunny} from "@element-plus/icons-vue";
 
+const value1 = ref(false);
 </script>
 <style>
     @font-face {
@@ -25,6 +32,7 @@ import EasyForm from "../../components/EasyForm/EasyForm.vue";
     }
 
     .login-container {
+      position: relative;
       display: flex;
       height: 100vh;
       width: 100vw;
@@ -32,9 +40,16 @@ import EasyForm from "../../components/EasyForm/EasyForm.vue";
 
     .login-side-wrapper {
       width: 100%;
-      margin-top: 64px;
+      margin-top: 58px;
       padding: 20px;
     }
+
+    .el-switch {
+      position:absolute;
+      top: 20px;
+      right: 30px;
+    }
+
     .login-image {
       flex: 2;
       background-image: url('../../assets/login-bg-image.jpg');

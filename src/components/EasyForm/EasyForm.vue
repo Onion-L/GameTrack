@@ -18,8 +18,6 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
-
 const formInfoData = reactive({
   username: '',
   password: '',
