@@ -12,7 +12,7 @@
               <img class="gt-logo-img" src="logo.png" alt="logo">
               <h1 class="gt-logo-title">GameTrack</h1>
             </div>
-            <EasyForm />
+            <EasyForm :submitHandle="submitHandle"/>
           </div>
         </div>
     </div>
@@ -20,8 +20,16 @@
 <script setup>
 import EasyForm from "../../components/EasyForm/EasyForm.vue";
 import { Moon, Sunny} from "@element-plus/icons-vue";
+import http from "../../utils/api.js";
 
 const value1 = ref(false);
+
+const submitHandle = (formData) => {
+  http.post('/login', formData)
+      .then(response => {
+        console.log(response);
+      });
+};
 </script>
 <style>
     @font-face {

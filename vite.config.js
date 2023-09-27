@@ -10,6 +10,9 @@ export default defineConfig({
     port: 8080,
     open: true,
   },
+    proxy: {
+        '/api': 'http://localhost:3000', // 将以 /api 开头的请求代理到 http://localhost:8080
+    },
   plugins: [
       vue(),
       AutoImport({

@@ -13,16 +13,22 @@
     <el-form-item>
       <el-checkbox v-model="isChecked">Remember me</el-checkbox>
     </el-form-item>
-    <el-button type="primary">Sign In</el-button>
+    <el-button type="primary" @click="loginHandle">Sign In</el-button>
   </el-form>
 </template>
 
 <script setup>
+import http from "../../utils/api.js";
+
+const props = defineProps(["submitHandle"]);
+
 const formInfoData = reactive({
   username: '',
   password: '',
 })
-
+const loginHandle = () => {
+  props.submitHandle(formInfoData);
+}
 const isChecked = ref(false);
 </script>
 
