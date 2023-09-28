@@ -10,10 +10,9 @@
 </template>
 
 <style scoped lang="less">
+@import "../../../style/variable";
 @font-face {
   font-family: 'Caveat';
-  //font-family: 'Bungee Spice';
-  //font-family: 'Nabla';
   src: url('../../../assets/fonts/Caveat-Bold.ttf');
 }
 
@@ -21,8 +20,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
-
+  width: @gt-side-bar-width--expend;
+  height: @gt-nav-bar-height;
   .gt-logo-img {
     width: 50px;
     height: auto;
@@ -30,8 +29,6 @@
 
   .gt-logo-title {
     font-family: 'Caveat', cursive;
-    //font-family: 'Bungee Spice', cursive;
-    //font-family: 'Nabla', cursive;
     text-align: center;
     margin-left: 10px;
   }

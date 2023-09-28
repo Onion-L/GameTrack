@@ -1,4 +1,6 @@
 <template>
+  <div class="sidebar-wrapper">
+    <Logo />
   <el-row class="tac">
     <el-col>
       <el-menu
@@ -39,6 +41,7 @@
       </el-menu>
     </el-col>
   </el-row>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -48,6 +51,7 @@ import {
   Location,
   Setting,
 } from '@element-plus/icons-vue'
+import Logo from "../Logo/Logo.vue";
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -57,8 +61,13 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 
 <style lang="less">
+@import "../../../style/variable";
+.sidebar-wrapper {
+  width: @gt-side-bar-width--expend;
+  height: @gt-side-bar-height;
+}
 .tac {
-  height: 100%;
+  height: calc(100vh - @gt-nav-bar-height);
   width: 100%;
   .el-menu-vertical-demo {
     height: 100%;

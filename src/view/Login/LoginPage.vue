@@ -17,6 +17,7 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import EasyForm from "../../components/EasyForm/EasyForm.vue";
 import { Moon, Sunny} from "@element-plus/icons-vue";
@@ -34,10 +35,10 @@ const submitHandle = (formData) => {
       });*/
   router.replace({
     path:'/'
-  })
-
+  });
 };
 </script>
+
 <style lang="less">
 @import "../../style/variable";
 

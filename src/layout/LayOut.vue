@@ -8,7 +8,6 @@ import Logo from "./components/Logo/Logo.vue";
 <template>
   <div class="app-wrapper">
   <div class="side-bar">
-    <Logo></Logo>
     <SideBar />
   </div>
   <div class="right-side">
@@ -26,8 +25,7 @@ import Logo from "./components/Logo/Logo.vue";
   .app-wrapper {
     display: flex;
     .side-bar {
-      width: @gt-side-bar-width--expend;
-      height: @gt-side-bar-height;
+
       display: inline-block;
     }
 
