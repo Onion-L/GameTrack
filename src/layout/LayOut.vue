@@ -3,6 +3,7 @@
 import NavBar from "./components/NavBar/NavBar.vue";
 import SideBar from "./components/SideBar/SideBar.vue";
 import Logo from "./components/Logo/Logo.vue";
+import AppMain from "./components/AppMain/AppMain.vue";
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import Logo from "./components/Logo/Logo.vue";
       <NavBar />
     </div>
     <div class="content">
+      <AppMain />
     </div>
   </div>
   </div>
@@ -25,7 +27,6 @@ import Logo from "./components/Logo/Logo.vue";
   .app-wrapper {
     display: flex;
     .side-bar {
-
       display: inline-block;
     }
 
@@ -36,12 +37,12 @@ import Logo from "./components/Logo/Logo.vue";
     .nav-bar {
       width: 100%;
       display: inline-block;
+      }
     }
+
+
     .content{
-      background-color:#000;
       width:100%;
-
-
     }
-  }
+
 </style>
