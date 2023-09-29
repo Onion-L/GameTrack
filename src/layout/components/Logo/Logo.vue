@@ -22,6 +22,7 @@
   align-items: center;
   width: @gt-side-bar-width--expend;
   height: @gt-nav-bar-height;
+  background-color: #001428;
   .gt-logo-img {
     width: 50px;
     height: auto;
@@ -31,6 +32,7 @@
     font-family: 'Caveat', cursive;
     text-align: center;
     margin-left: 10px;
+    color: #fff;
   }
 }
 </style>
