@@ -37,5 +37,4 @@ const toggleIcon = () => {
     display: none;
   }
 }
-
 </style>
