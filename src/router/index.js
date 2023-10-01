@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import HomePage from "../view/Home/HomePage.vue";
 import LoginPage from "../view/Login/LoginPage.vue";
 import LayOut from "../layout/LayOut.vue";
+import Dashboard from "../view/Dashboard/Dashboard.vue";
 
 const constantRoutes = [
     {
@@ -12,7 +13,11 @@ const constantRoutes = [
             {
                 path:'home',
                 component:HomePage
-            }
+            },
+            {
+                path:'dashboard',
+                component:Dashboard
+            },
         ]
     },
     {

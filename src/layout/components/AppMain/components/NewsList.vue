@@ -4,7 +4,7 @@
 
 <template>
   <div class="news-wrapper">
-    <div class="news-image"> 
+    <div class="news-image">
       <img style="height: 80px" src="../../../../assets/news-image.jpg" alt="news-image"/>
     </div>
     <div class="news-content">
@@ -21,7 +21,6 @@
 @import "../../../../style/variable";
 .news-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: @gt-right-width--expend * 0.6;
   background-color: #fff;

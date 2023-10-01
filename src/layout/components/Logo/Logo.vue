@@ -1,17 +1,21 @@
 <script setup>
-const props = defineProps(['isCollapse']);
-const {isCollapse} = props;
+import {useAppStore} from "../../../stores/app.js";
+import {storeToRefs} from "pinia";
 
-onMounted(() => {
-  console.log('logo',props.isCollapse)
-})
+const appStore = useAppStore();
+const {sideStatus} = storeToRefs(appStore);
+
 </script>
 
 <template>
-  <div class="gt-logo-container" :class="{'logo-collapse':isCollapse, 'gt-logo-container':!isCollapse}">
-    <img class="gt-logo-img" src="../../../assets/logo.png" alt="logo">
-    <h1 v-show="!isCollapse" class="gt-logo-title">GameTrack</h1>
+  <transition name="logo-fade">
+  <div class="gt-logo-container" :class="{'collapse':sideStatus, 'gt-logo-container':!sideStatus}">
+
+      <img class="gt-logo-img" src="../../../assets/logo.png" alt="logo">
+      <h1 class="gt-logo-title">GameTrack</h1>
   </div>
+  </transition>
+
 </template>
 
 <style scoped lang="less">
@@ -23,11 +27,11 @@ onMounted(() => {
 
 .gt-logo-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: @gt-side-bar-width--expend;
+  justify-content: center;
+  width: @gt-side-bar-width--expend - 1px;
   height: @gt-nav-bar-height;
-  background-color: #001428;
+  background-color:@gt-side-bar-bg-color;
   .gt-logo-img {
     width: 50px;
     height: auto;
@@ -40,4 +44,21 @@ onMounted(() => {
     color: #fff;
   }
 }
+
+.collapse {
+  width: 99%;
+  .gt-logo-img {
+    width: 32px;
+    height: 32px;
+  }
+  .gt-logo-title {
+    display: none;
+  }
+}
+
+.logo-fade-enter-active,
+.logo-fade-leave-active {
+  transition: all 0.5s ease;
+}
+
 </style>

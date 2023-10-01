@@ -3,9 +3,31 @@
       :default-active="activeIndex2"
       class="el-menu-demo"
       mode="horizontal"
+      :ellipsis="false"
       @select="handleSelect"
+      router
   >
     <Hamburger :isCollapse="sideStatus" @click="toggleIcon"/>
+    <div class="flex-grow" />
+
+    <el-menu-item>
+        <img style="width: 32px;" src="../../../assets/github-mark.svg" alt="github" />
+    </el-menu-item>
+
+    <el-sub-menu>
+      <template #title>
+        <img style="width: 32px;" src="../../../assets/user.png" alt="profile" />
+      </template>
+      <el-menu-item>
+        <el-icon><Setting /></el-icon>
+        Setting
+      </el-menu-item>
+      <el-menu-item>
+        <el-icon><SwitchButton /></el-icon>
+        Log out
+      </el-menu-item>
+    </el-sub-menu>
+
   </el-menu>
 </template>
 
@@ -13,6 +35,7 @@
 import Hamburger from "./components/Hamburger.vue";
 import {useAppStore} from '../../../stores/app.js'
 import {storeToRefs} from 'pinia';
+import {Setting, SwitchButton} from "@element-plus/icons-vue";
 
 const activeIndex2 = ref('1');
 const handleSelect = (key, keyPath) => {
@@ -23,7 +46,6 @@ const {sideStatus} = storeToRefs(appStore);
 
 const toggleIcon = () => {
   appStore.toggleSidebarStatus();
-  console.log(sideStatus.value)
 }
 </script>
 
@@ -37,5 +59,9 @@ const toggleIcon = () => {
   @media (max-width: 600px) {
     display: none;
   }
+}
+
+.flex-grow {
+  flex: 1;
 }
 </style>

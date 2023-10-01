@@ -1,22 +1,23 @@
 <template>
   <div class="sidebar-wrapper">
-    <Logo :isCollapse="props.isCollapse"/>
+    <Logo/>
   <el-row class="tac">
     <el-col>
       <el-menu
           default-active="1"
           class="el-menu-vertical-demo"
-          :collapse="props.isCollapse"
+          :collapse="sideStatus"
           background-color="#001428"
           text-color="#fff"
           @open="handleOpen"
           @close="handleClose"
+          router
       >
         <el-menu-item index="1">
           <el-icon><House /></el-icon>
             <span>Home</span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="/dashboard">
           <el-icon><Odometer /></el-icon>
           <span>Dashboard</span>
         </el-menu-item>
@@ -45,6 +46,10 @@
 <script lang="ts" setup>
 import {Odometer, House, More, User, DataLine, Grid,} from '@element-plus/icons-vue'
 import Logo from "../Logo/Logo.vue";
+
+import {useAppStore} from "../../../stores/app.js";
+import {storeToRefs} from "pinia";
+
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -52,7 +57,9 @@ const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 
-const props = defineProps(['isCollapse']);
+const appStore = useAppStore();
+const {sideStatus} = storeToRefs(appStore);
+
 </script>
 
 <style lang="less">
