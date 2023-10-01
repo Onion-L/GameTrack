@@ -1,11 +1,12 @@
 <template>
   <div class="sidebar-wrapper">
-    <Logo />
+    <Logo :isCollapse="props.isCollapse"/>
   <el-row class="tac">
     <el-col>
       <el-menu
           default-active="1"
           class="el-menu-vertical-demo"
+          :collapse="props.isCollapse"
           background-color="#001428"
           text-color="#fff"
           @open="handleOpen"
@@ -42,12 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting, HomeFilled, Odometer, House, More, User, DataLine, Grid,
-} from '@element-plus/icons-vue'
+import {Odometer, House, More, User, DataLine, Grid,} from '@element-plus/icons-vue'
 import Logo from "../Logo/Logo.vue";
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
@@ -55,12 +51,14 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
+
+const props = defineProps(['isCollapse']);
 </script>
 
 <style lang="less">
 @import "../../../style/variable";
 .sidebar-wrapper {
-  width: @gt-side-bar-width--expend;
+  //width: @gt-side-bar-width--expend;
   height: @gt-side-bar-height;
   box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
 }

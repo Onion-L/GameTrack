@@ -23,6 +23,7 @@ const {sideStatus} = storeToRefs(appStore);
 
 const toggleIcon = () => {
   appStore.toggleSidebarStatus();
+  console.log(sideStatus.value)
 }
 </script>
 

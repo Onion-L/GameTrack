@@ -1,15 +1,17 @@
 <script setup>
-
 import NavBar from "./components/NavBar/NavBar.vue";
 import SideBar from "./components/SideBar/SideBar.vue";
-import Logo from "./components/Logo/Logo.vue";
 import AppMain from "./components/AppMain/AppMain.vue";
+import {useAppStore} from "../stores/app.js";
+import {storeToRefs} from "pinia";
+const appStore = useAppStore();
+const {sideStatus} = storeToRefs(appStore);
 </script>
 
 <template>
   <div class="app-wrapper">
   <div class="side-bar">
-    <SideBar />
+    <SideBar :isCollapse="sideStatus"/>
   </div>
   <div class="right-side">
     <div class="nav-bar">

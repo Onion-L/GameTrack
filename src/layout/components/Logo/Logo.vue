@@ -1,11 +1,16 @@
 <script setup>
+const props = defineProps(['isCollapse']);
+const {isCollapse} = props;
 
+onMounted(() => {
+  console.log('logo',props.isCollapse)
+})
 </script>
 
 <template>
-  <div class="gt-logo-container">
+  <div class="gt-logo-container" :class="{'logo-collapse':isCollapse, 'gt-logo-container':!isCollapse}">
     <img class="gt-logo-img" src="../../../assets/logo.png" alt="logo">
-    <h1 class="gt-logo-title">GameTrack</h1>
+    <h1 v-show="!isCollapse" class="gt-logo-title">GameTrack</h1>
   </div>
 </template>
 
