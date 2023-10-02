@@ -4,7 +4,7 @@
   <el-row class="tac">
     <el-col>
       <el-menu
-          default-active="1"
+          default-active="home"
           class="el-menu-vertical-demo"
           :collapse="sideStatus"
           background-color="#001428"
@@ -13,27 +13,27 @@
           @close="handleClose"
           router
       >
-        <el-menu-item index="1">
+        <el-menu-item index="home">
           <el-icon><House /></el-icon>
             <span>Home</span>
         </el-menu-item>
-        <el-menu-item index="/dashboard">
+        <el-menu-item index="dashboard">
           <el-icon><Odometer /></el-icon>
           <span>Dashboard</span>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="teams">
           <el-icon><Grid /></el-icon>
           <span>Teams</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="players">
           <el-icon><User /></el-icon>
           <span>Players</span>
         </el-menu-item>
-        <el-menu-item index="5">
+        <el-menu-item index="analysis">
           <el-icon><DataLine /></el-icon>
           <span>Analysis</span>
         </el-menu-item>
-        <el-menu-item index="6">
+        <el-menu-item index="more">
           <el-icon><More /></el-icon>
           <span>More</span>
         </el-menu-item>

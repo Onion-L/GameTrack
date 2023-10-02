@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start:mock": "vite --mode mock",
+    "start:dev": "vite --mode dev",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -23,6 +25,7 @@
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-vue": "^9.17.0",
+    "mockjs": "^1.1.0",
     "prettier": "^3.0.3",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.2",
