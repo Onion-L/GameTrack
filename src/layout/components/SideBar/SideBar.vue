@@ -4,7 +4,7 @@
   <el-row class="tac">
     <el-col>
       <el-menu
-          default-active="home"
+          default-active="dashboard"
           class="el-menu-vertical-demo"
           :collapse="sideStatus"
           background-color="#001428"
@@ -13,10 +13,6 @@
           @close="handleClose"
           router
       >
-        <el-menu-item index="home">
-          <el-icon><House /></el-icon>
-            <span>Home</span>
-        </el-menu-item>
         <el-menu-item index="dashboard">
           <el-icon><Odometer /></el-icon>
           <span>Dashboard</span>
@@ -44,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Odometer, House, More, User, DataLine, Grid,} from '@element-plus/icons-vue'
+import {Odometer, More, User, DataLine, Grid,} from '@element-plus/icons-vue'
 import Logo from "../Logo/Logo.vue";
 
 import {useAppStore} from "../../../stores/app.js";

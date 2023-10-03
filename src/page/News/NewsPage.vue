@@ -13,6 +13,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <nav>
+    GameTrack
+  </nav>
   <el-scrollbar height="92vh">
     <div class="block text-center">
       <el-carousel height="400px">
@@ -74,7 +77,8 @@ onMounted(() => {
 }
 
 .trend-list {
-  width: 100px;
+  width: 100%;
+  padding: 20px 10px 0;
 }
 </style>
 

@@ -1,28 +1,49 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HomePage from "../view/Home/HomePage.vue";
 import LoginPage from "../view/Login/LoginPage.vue";
 import LayOut from "../layout/LayOut.vue";
+import HomePage from "../page/News/NewsPage.vue";
 import Dashboard from "../view/Dashboard/Dashboard.vue";
+import TeamPage from "../view/Teams/TeamPage.vue";
+import PlayerPage from "../view/Players/PlayerPage.vue";
+import AnalysisPage from "../view/Analysis/AnalysisPage.vue";
+import SettingPage from "../view/Settings/SettingPage.vue";
+import NewsPage from "../page/News/NewsPage.vue";
 
 const constantRoutes = [
     {
         path:'/',
         component:LayOut,
-        redirect:'/home',
+        redirect:'/dashboard',
         children:[
-            {
-                path:'home',
-                component:HomePage
-            },
             {
                 path:'dashboard',
                 component:Dashboard
             },
+            {
+                path:'teams',
+                component:TeamPage
+            },
+            {
+                path:'players',
+                component:PlayerPage
+            },
+            {
+                path:'analysis',
+                component:AnalysisPage
+            },
         ]
+    },
+    {
+        path:'/news',
+        component:NewsPage
     },
     {
         path:'/login',
         component:LoginPage
+    },
+    {
+        path:'/settings',
+        component:SettingPage
     },
 
 ];
