@@ -1,15 +1,24 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import LoginPage from "../view/Login/LoginPage.vue";
 import LayOut from "../layout/LayOut.vue";
-import HomePage from "../page/News/NewsPage.vue";
+import HomePage from "../page/Home/HomePage.vue";
 import Dashboard from "../view/Dashboard/Dashboard.vue";
 import TeamPage from "../view/Teams/TeamPage.vue";
 import PlayerPage from "../view/Players/PlayerPage.vue";
 import AnalysisPage from "../view/Analysis/AnalysisPage.vue";
 import SettingPage from "../view/Settings/SettingPage.vue";
 import NewsPage from "../page/News/NewsPage.vue";
+import Test from "../../Test/Test.vue";
 
 const constantRoutes = [
+    {
+      path:'/home',
+      component:HomePage
+    },
+    {
+        path:'/TestGround',
+        component: Test
+    },
     {
         path:'/',
         component:LayOut,

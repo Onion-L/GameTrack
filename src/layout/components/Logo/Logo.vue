@@ -10,7 +10,6 @@ const {sideStatus} = storeToRefs(appStore);
 <template>
   <transition name="logo-fade">
   <div class="gt-logo-container" :class="{'collapse':sideStatus, 'gt-logo-container':!sideStatus}">
-
       <img class="gt-logo-img" src="../../../assets/logo.png" alt="logo">
       <h1 class="gt-logo-title">GameTrack</h1>
   </div>

@@ -2,6 +2,7 @@
 import http from '../../utils/api.js';
 import NewsList from "./components/NewsList.vue";
 import TrendList from "./components/TrendList.vue";
+import Logo from "../../layout/components/Logo/Logo.vue";
 
 const newsList = ref([]);
 onMounted(() => {
@@ -14,7 +15,7 @@ onMounted(() => {
 
 <template>
   <nav>
-    GameTrack
+    <Logo></Logo>
   </nav>
   <el-scrollbar height="92vh">
     <div class="block text-center">
@@ -38,6 +39,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+nav {
+  height: 54px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
 .scrollbar-demo-item {
   display: flex;
   align-items: center;
