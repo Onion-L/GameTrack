@@ -26,7 +26,6 @@ declare module 'vue' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     Header: typeof import('./src/components/Header/Header.vue')['default']
     Logo: typeof import('./src/components/Logo/Logo.vue')['default']
-    Navigation: typeof import('./src/components/Header/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
