@@ -3,7 +3,8 @@ import { defineStore } from "pinia";
 export const useAppStore = defineStore("app", {
 	state: () => {
 		return {
-			sideStatus: false
+			sideStatus: false,
+			sideMenu: false
 		};
 	},
 	getters: {
@@ -12,6 +13,9 @@ export const useAppStore = defineStore("app", {
 	actions: {
 		toggleSidebarStatus() {
 			this.sideStatus = !this.sideStatus;
+		},
+		toggleSideMenu() {
+			this.sideMenu = !this.sideMenu;
 		}
 	}
 });

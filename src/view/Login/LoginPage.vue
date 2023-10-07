@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import EasyForm from "../../components/EasyForm/EasyForm.vue";
+import EasyForm from "./components/EasyForm/EasyForm.vue";
 import { Moon, Sunny} from "@element-plus/icons-vue";
 import http from "../../utils/api.js";
 import {useRouter} from "vue-router";
@@ -27,16 +27,22 @@ import {useRouter} from "vue-router";
 const router = useRouter();
 const remember = ref(false);
 
-const submitHandle = (formData) => {
+const submitHandle = (formData, userStored) => {
+  console.log(formData)
   /**{TODO}*/
-  /*http.post('/login', formData)
+  http.post('/login', formData)
       .then(response => {
         console.log(response);
-      });*/
-  router.replace({
-    path:'/'
-  });
-};
+        if(response.data.code === 200) {
+          if(userStored){
+            document.cookie =`username=${response.data.data.username}; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/`;
+          }
+          router.replace({
+            path:'/'
+          });
+        }
+      });
+  };
 </script>
 
 <style lang="less">

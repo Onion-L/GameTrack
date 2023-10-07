@@ -11,14 +11,14 @@
       <el-input type="password" v-model="formInfoData.password" placeholder="Password"/>
     </el-form-item>
     <el-form-item>
-      <el-checkbox v-model="isChecked">Remember me</el-checkbox>
+      <el-checkbox v-model="userStored">Remember me</el-checkbox>
     </el-form-item>
     <el-button type="primary" @click="loginHandle">Sign In</el-button>
   </el-form>
 </template>
 
 <script setup>
-import http from "../../utils/api.js";
+import http from "../../../../utils/api.js";
 
 const props = defineProps(["submitHandle"]);
 
@@ -26,10 +26,11 @@ const formInfoData = reactive({
   username: '',
   password: '',
 })
+const userStored = ref(false);
 const loginHandle = () => {
-  props.submitHandle(formInfoData);
+  props.submitHandle(formInfoData,userStored);
 }
-const isChecked = ref(false);
+
 </script>
 
 <style lang="css">

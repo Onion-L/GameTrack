@@ -7,7 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    EasyForm: typeof import('./src/components/EasyForm/EasyForm.vue')['default']
+    EasyForm: typeof import('./src/view/Login/components/EasyForm/EasyForm.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
