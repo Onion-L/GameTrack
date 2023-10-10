@@ -1,6 +1,6 @@
 <script setup>
 import {Menu as ElMenu} from "@element-plus/icons-vue";
-import {useAppStore} from "../../../stores/app.js";
+import {useAppStore} from "../../../stores/appStore.js";
 
 const props = defineProps(['title']);
 const appStore = useAppStore();

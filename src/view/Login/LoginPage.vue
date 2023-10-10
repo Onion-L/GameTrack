@@ -1,3 +1,32 @@
+<script setup>
+import EasyForm from "./components/EasyForm/EasyForm.vue";
+import { Moon, Sunny} from "@element-plus/icons-vue";
+import http from "../../utils/api.js";
+import Cookie from 'js-cookie';
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+const remember = ref(false);
+
+const submitHandle = (formData, userStored) => {
+  console.log(formData)
+  /**{TODO}*/
+  http.post('/login', formData)
+      .then(response => {
+        console.log(response);
+        if(response.data.code === 200) {
+          if(userStored){
+            // document.cookie =`username=${response.data.data.username}; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/`;
+            Cookie.set('username',response.data.data.username,{expires: 7});
+          }
+          router.replace({
+            path:'/'
+          });
+        }
+      });
+};
+</script>
+
 <template>
     <div class="login-container">
         <div class="login-image"></div>
@@ -18,32 +47,6 @@
     </div>
 </template>
 
-<script setup>
-import EasyForm from "./components/EasyForm/EasyForm.vue";
-import { Moon, Sunny} from "@element-plus/icons-vue";
-import http from "../../utils/api.js";
-import {useRouter} from "vue-router";
-
-const router = useRouter();
-const remember = ref(false);
-
-const submitHandle = (formData, userStored) => {
-  console.log(formData)
-  /**{TODO}*/
-  http.post('/login', formData)
-      .then(response => {
-        console.log(response);
-        if(response.data.code === 200) {
-          if(userStored){
-            document.cookie =`username=${response.data.data.username}; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/`;
-          }
-          router.replace({
-            path:'/'
-          });
-        }
-      });
-  };
-</script>
 
 <style lang="less">
 @import "../../style/variable";

@@ -2,7 +2,7 @@
 
 import {Close} from "@element-plus/icons-vue";
 import {storeToRefs} from "pinia";
-import {useAppStore} from "../../../stores/app.js";
+import {useAppStore} from "../../../stores/appStore.js";
 const appStore = storeToRefs(useAppStore());
 const showSideMenu = appStore.sideMenu;
 </script>

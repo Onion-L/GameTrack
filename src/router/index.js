@@ -9,6 +9,8 @@ import AnalysisPage from "../view/Analysis/AnalysisPage.vue";
 import SettingPage from "../view/Settings/SettingPage.vue";
 import NewsPage from "../page/News/NewsPage.vue";
 import Test from "../../Test/Test.vue";
+import {authStoreHook} from "../stores/authStore.js";
+
 
 const constantRoutes = [
     {
@@ -47,6 +49,7 @@ const constantRoutes = [
         component:NewsPage
     },
     {
+        name:'Login',
         path:'/login',
         component:LoginPage
     },
@@ -62,6 +65,15 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes:constantRoutes, // `routes: routes` 的缩写
 });
+
+router.beforeEach((to, from, next) => {
+    const authStore = authStoreHook();
+    if(to.name !== 'Login' && !authStore.isLoggedIn) {
+        next({path: '/login'})
+    }else {
+        next();
+    }
+})
 
 export default router;
 

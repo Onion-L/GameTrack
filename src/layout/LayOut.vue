@@ -2,7 +2,10 @@
 import NavBar from "./components/NavBar/NavBar.vue";
 import SideBar from "./components/SideBar/SideBar.vue";
 import AppMain from "./components/AppMain/AppMain.vue";
-
+import Cookie from "js-cookie";
+onMounted(()=>{
+  console.log(Cookie.get('username'))
+})
 </script>
 
 <template>

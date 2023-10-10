@@ -1,5 +1,5 @@
 <script setup>
-import {useAppStore} from "../../../stores/app.js";
+import {useAppStore} from "../../../stores/appStore.js";
 import {storeToRefs} from "pinia";
 
 const appStore = useAppStore();

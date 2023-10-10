@@ -22,7 +22,7 @@
         <el-icon><Setting /></el-icon>
         Setting
       </el-menu-item>
-      <el-menu-item>
+      <el-menu-item @click="handleLogOut">
         <el-icon><SwitchButton /></el-icon>
         Log out
       </el-menu-item>
@@ -33,9 +33,10 @@
 
 <script lang="js" setup>
 import Hamburger from "./components/Hamburger.vue";
-import {useAppStore} from '../../../stores/app.js'
+import {useAppStore} from '../../../stores/appStore.js'
 import {storeToRefs} from 'pinia';
 import {Setting, SwitchButton} from "@element-plus/icons-vue";
+import Cookie from 'js-cookie';
 
 const activeIndex2 = ref('1');
 const handleSelect = (key, keyPath) => {
@@ -46,6 +47,10 @@ const {sideStatus} = storeToRefs(appStore);
 
 const toggleIcon = () => {
   appStore.toggleSidebarStatus();
+}
+
+const handleLogOut = () => {
+  Cookie.remove()
 }
 </script>
 
