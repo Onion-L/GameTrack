@@ -10,6 +10,7 @@ import SettingPage from "../view/Settings/SettingPage.vue";
 import NewsPage from "../page/News/NewsPage.vue";
 import Test from "../../Test/Test.vue";
 import {authStoreHook} from "../stores/authStore.js";
+import ErrorPage from "../page/Error/ErrorPage.vue";
 
 
 const constantRoutes = [
@@ -57,6 +58,10 @@ const constantRoutes = [
         path:'/settings',
         component:SettingPage
     },
+    {
+        path:'/:pathMatch(.*)*',
+        component: ErrorPage
+    }
 
 ];
 
@@ -66,14 +71,14 @@ const router = createRouter({
     routes:constantRoutes, // `routes: routes` 的缩写
 });
 
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
     const authStore = authStoreHook();
-    if(to.name !== 'Login' && !authStore.isLoggedIn) {
+    if(to.name !== 'Login') {
         next({path: '/login'})
     }else {
         next();
     }
-})
+})*/
 
 export default router;
 

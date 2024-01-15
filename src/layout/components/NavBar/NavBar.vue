@@ -36,9 +36,11 @@ import Hamburger from "./components/Hamburger.vue";
 import {useAppStore} from '../../../stores/appStore.js'
 import {storeToRefs} from 'pinia';
 import {Setting, SwitchButton} from "@element-plus/icons-vue";
-import Cookie from 'js-cookie';
+import {removeCookie} from "../../../utils/cookie.js";
+import {useRouter} from "vue-router";
 
 const activeIndex2 = ref('1');
+const router = useRouter();
 const handleSelect = (key, keyPath) => {
   console.log(key, keyPath)
 }
@@ -50,7 +52,9 @@ const toggleIcon = () => {
 }
 
 const handleLogOut = () => {
-  Cookie.remove()
+  removeCookie('username').then(_=> {
+    router.replace('/login');
+  });
 }
 </script>
 

@@ -26,10 +26,11 @@ export const setCookie =  (key,value,expires='7') => {
     })
 }
 
-export const removeCookie = (key,value,expires='7') => {
+export const removeCookie = (key) => {
     return new Promise((resolve,reject) => {
         if(Cookie.get(key)) {
             Cookie.remove(key);
+            resolve('Cookie is removed');
         }else {
             reject('Cannot find the cookie');
         }

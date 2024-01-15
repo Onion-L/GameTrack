@@ -14,7 +14,6 @@ export const useAuthStore = defineStore('auth', {
     actions: {
     }
 });
-
 export function authStoreHook() {
     return useAuthStore(store);
 }
