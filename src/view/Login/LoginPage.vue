@@ -34,7 +34,7 @@ const submitHandle = (formData, userStored) => {
       <el-switch v-model="remember" :active-action-icon="Moon" :inactive-action-icon="Sunny" />
       <div class="login-side-wrapper">
         <div class="gt-logo-container">
-          <img class="gt-logo-img" src="../../assets/logo.png" alt="logo">
+          <img class="gt-logo-img" src="../../assets/images/logo.png" alt="logo">
           <h1 class="gt-logo-title">GameTrack</h1>
         </div>
         <EasyForm :submitHandle="submitHandle" />
@@ -44,8 +44,8 @@ const submitHandle = (formData, userStored) => {
 </template>
 
 
-<style lang="less">
-@import "../../style/variable";
+<style lang="scss">
+@import "../../style/variable.scss";
 
 @font-face {
   font-family: 'Caveat';
@@ -68,7 +68,7 @@ const submitHandle = (formData, userStored) => {
 
   .login-image {
     flex: 2;
-    background-image: url('../../assets/login-bg-image.jpg');
+    background-image: url('pictures/login-bg-image.jpg');
     background-size: cover;
     background-position: center;
 
@@ -84,7 +84,7 @@ const submitHandle = (formData, userStored) => {
     flex-direction: column;
     align-items: center;
     flex: 1;
-    background-color: @gt-website-theme--light;
+    background-color: $gt-website-theme--light;
     /* background: linear-gradient(0.5turn, #000,#212121); */
     min-width: 400px;
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;

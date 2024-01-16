@@ -32,18 +32,19 @@ const handleScroll = (event) => {
     <div class="text-column">
       <h1>Unlock Your Full Potential with Player Data Insights</h1>
       <p>
-        Are you ready to take your game to the next level? Welcome to the ultimate player data analysis platform, your secret weapon for success on the field!
+        Are you ready to take your game to the next level? Welcome to the ultimate player data analysis platform, your
+        secret weapon for success on the field!
       </p>
     </div>
 
     <div class="content-container">
       <div class="content">
         <div class="right-content">
-          <img class="football-1-img" src="../../assets/football-1.jpg" alt="football field">
+          <img class="football-1-img" src="../../assets/images/football-1.jpg" alt="football field">
         </div>
-      <div class="left-content article" style="color: #fff">
-        <h1>Unlock Your Full Potential with Player Data Insights</h1>
-      </div>
+        <div class="left-content article" style="color: #fff">
+          <h1>Unlock Your Full Potential with Player Data Insights</h1>
+        </div>
       </div>
     </div>
 
@@ -51,15 +52,16 @@ const handleScroll = (event) => {
       <div class="left-content" style="color: #fff">
         <h1>Unlock Your Full Potential with Player Data Insights</h1>
       </div>
-      <div class="right-content article" >
-        <img class="football-2-img" src="../../assets/football-2.jpg" alt="football field">
+      <div class="right-content article">
+        <img class="football-2-img" src="../../assets/images/football-2.jpg" alt="football field">
       </div>
     </div>
   </div>
 </template>
 
-<style scoped lang="less">
-@import "../../style/variable.less";
+<style scoped lang="scss">
+@import "../../style/variable.scss";
+
 @font-face {
   font-family: 'Caveat';
   src: url('../../assets/fonts/Caveat-Bold.ttf');
@@ -68,7 +70,7 @@ const handleScroll = (event) => {
 .home-container {
   position: relative;
   overflow: hidden;
-  background:url("../../assets/Old-Trafford.jpg") no-repeat center fixed;
+  background: url("../../assets/images/Old-Trafford.jpg") no-repeat center fixed;
   background-size: cover;
 
   .menu-enter-active,
@@ -87,17 +89,21 @@ const handleScroll = (event) => {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)); /* 半透明黑色蒙层 */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+    /* 半透明黑色蒙层 */
   }
+
   .title-container {
     position: absolute;
     margin-left: 60px;
     margin-top: 80px;
+
     .main-title {
-      font-size:160px;
-      color:#fff;
-      font-family: 'Caveat',sans-serif;
+      font-size: 160px;
+      color: #fff;
+      font-family: 'Caveat', sans-serif;
     }
+
     .main-article {
       width: 550px;
       font-size: 24px;
@@ -105,6 +111,7 @@ const handleScroll = (event) => {
       padding-left: 20px;
     }
   }
+
   .index-1 {
     width: 100vw;
     height: 100vh;
@@ -115,19 +122,22 @@ const handleScroll = (event) => {
     background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
   }
+
   .content-container {
-    width:100vw;
+    width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.9);
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
+
     .content {
       width: 100%;
       height: 45vh;
       display: flex;
     }
+
     .football-1-img {
       width: 45vw;
     }

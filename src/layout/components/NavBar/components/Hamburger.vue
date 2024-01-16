@@ -9,7 +9,7 @@ const props = defineProps(['isCollapse']);
       <el-icon v-else size="20" class="icon"><Fold /></el-icon>
   </div>
 </template>
-<style scoped lang="less">
+<style scoped lang="scss">
 .hamburger {
   width: 50px;
   line-height: 56px;

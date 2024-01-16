@@ -5,12 +5,12 @@
 <template>
   <div class="error-container">
     <h1>4</h1>
-      <img src="../../assets/football.png" alt="football">
+      <img src="../../assets/images/football.png" alt="football">
     <h1>4</h1>
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
   .error-container {
     display: flex;
     flex-direction: row;

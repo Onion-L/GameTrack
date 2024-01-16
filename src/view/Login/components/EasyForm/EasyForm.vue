@@ -33,7 +33,7 @@ const loginHandle = () => {
 
 </script>
 
-<style lang="css">
+<style lang="scss">
   .el-button {
     width: 100%;
     height: 42px;

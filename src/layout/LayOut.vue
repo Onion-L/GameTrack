@@ -24,8 +24,8 @@ onMounted(()=>{
   </div>
 </template>
 
-<style scoped lang="less">
-@import "../style/variable";
+<style scoped lang="scss">
+@import "../style/variable.scss";
   .app-wrapper {
     display: flex;
     .side-bar {
@@ -33,7 +33,7 @@ onMounted(()=>{
     }
 
     .right-side {
-      width: @gt-right-width--expend;
+      width: $gt-right-width--expend;
     }
 
     .nav-bar {
@@ -41,7 +41,6 @@ onMounted(()=>{
       display: inline-block;
       }
     }
-
 
     .content{
       width:100%;

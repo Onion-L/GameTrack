@@ -12,7 +12,7 @@ const showMenu = () => {
 <template>
   <div class="nav-container">
     <div class="logo-section">
-      <img class="gt-logo-img" src="../../../assets/logo.png" alt="logo">
+      <img class="gt-logo-img" src="../../../assets/images/logo.png" alt="logo">
       <span v-show="props.title">GameTrack</span>
     </div>
     <div class="flex-grow"></div>

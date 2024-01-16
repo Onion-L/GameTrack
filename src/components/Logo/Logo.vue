@@ -1,6 +1,6 @@
 <template>
   <div class="gt-logo-container">
-    <img class="gt-logo-img" src="../../assets/logo.png" alt="logo">
+    <img class="gt-logo-img" src="../../assets/images/logo.png" alt="logo">
     <h1 class="gt-logo-title">GameTrack</h1>
   </div>
 </template>
@@ -9,12 +9,13 @@
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .gt-logo-img {
   width: 40px;
 }
 
-@import "../../style/variable.less";
+@import "../../style/variable.scss";
+
 @font-face {
   font-family: 'Caveat';
   src: url('../../assets/fonts/Caveat-Bold.ttf');
@@ -25,9 +26,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: @gt-side-bar-width--expend - 1px;
-  height: @gt-nav-bar-height;
-  background-color:transparent;
+  width: calc($gt-side-bar-width--expend - 1px);
+  height: $gt-nav-bar-height;
+  background-color: transparent;
+
   .gt-logo-img {
     width: 50px;
     height: auto;

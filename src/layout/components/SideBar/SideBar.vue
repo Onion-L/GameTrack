@@ -58,20 +58,19 @@ const {sideStatus} = storeToRefs(appStore);
 
 </script>
 
-<style lang="less">
-@import "../../../style/variable";
+<style lang="scss">
+@import "../../../style/variable.scss";
 .sidebar-wrapper {
   //width: @gt-side-bar-width--expend;
-  height: @gt-side-bar-height;
+  height: $gt-side-bar-height;
   box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
 }
 .tac {
-  height: calc(100vh - @gt-nav-bar-height);
+  height: calc(100vh - $gt-nav-bar-height);
   width: 100%;
   .el-menu-vertical-demo {
     height: 100%;
     width: 100%;
   }
 }
-
 </style>
