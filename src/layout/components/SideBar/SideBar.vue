@@ -42,7 +42,6 @@
 <script lang="ts" setup>
 import {Odometer, More, User, DataLine, Grid,} from '@element-plus/icons-vue'
 import Logo from "../Logo/Logo.vue";
-
 import {useAppStore} from "../../../stores/appStore.js";
 import {storeToRefs} from "pinia";
 

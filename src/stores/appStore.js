@@ -4,7 +4,8 @@ export const useAppStore = defineStore("app", {
 	state: () => {
 		return {
 			sideStatus: false,
-			sideMenu: false
+			sideMenu: false,
+			isLight: true
 		};
 	},
 	getters: {
@@ -16,6 +17,9 @@ export const useAppStore = defineStore("app", {
 		},
 		toggleSideMenu() {
 			this.sideMenu = !this.sideMenu;
+		},
+		switchWebsiteTheme() {
+			this.isLight = !this.isLight;
 		}
 	}
 });
