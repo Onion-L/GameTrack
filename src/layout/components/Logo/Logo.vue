@@ -28,7 +28,7 @@ const { sideStatus } = storeToRefs(appStore);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc($gt-side-bar-width--expend - 1px);
+  width: calc($gt-side-bar-width--expend - 12px);
   height: $gt-nav-bar-height;
   background-color: $gt-side-bar-bg-color;
 

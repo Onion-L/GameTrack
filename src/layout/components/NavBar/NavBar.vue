@@ -9,11 +9,9 @@
   >
     <Hamburger :isCollapse="sideStatus" @click="toggleIcon"/>
     <div class="flex-grow" />
-
     <el-menu-item>
         <img style="width: 32px;" src="../../../assets/images/github-mark.svg" alt="github" />
     </el-menu-item>
-
     <el-sub-menu>
       <template #title>
         <img style="width: 32px;" src="../../../assets/images/user.png" alt="profile" />
@@ -63,8 +61,7 @@ const handleLogOut = () => {
 .el-menu-demo {
   height: $gt-nav-bar-height;
   border: none;
-  //box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
   @media (max-width: 600px) {
     display: none;
   }

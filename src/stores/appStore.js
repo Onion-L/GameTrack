@@ -5,11 +5,9 @@ export const useAppStore = defineStore("app", {
 		return {
 			sideStatus: false,
 			sideMenu: false,
-			isLight: true
-		};
-	},
-	getters: {
+			isLight: true,
 
+		};
 	},
 	actions: {
 		toggleSidebarStatus() {

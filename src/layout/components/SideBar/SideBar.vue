@@ -46,10 +46,10 @@ import {useAppStore} from "../../../stores/appStore.js";
 import {storeToRefs} from "pinia";
 
 const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+  console.log('open',key, keyPath)
 }
 const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+  console.log('close',key, keyPath)
 }
 
 const appStore = useAppStore();
@@ -60,9 +60,8 @@ const {sideStatus} = storeToRefs(appStore);
 <style lang="scss">
 @import "../../../style/variable.scss";
 .sidebar-wrapper {
-  //width: @gt-side-bar-width--expend;
+  //width: $gt-side-bar-width--expend;
   height: $gt-side-bar-height;
-  box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
 }
 .tac {
   height: calc(100vh - $gt-nav-bar-height);

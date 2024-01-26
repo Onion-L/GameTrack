@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import store from './index.js';
 
-export const useAuthStore = defineStore('auth', {
+export const useAuthStore = defineStore('authentication', {
     state: () =>({
             isAuthenticated:false,
             user: null
@@ -10,8 +10,6 @@ export const useAuthStore = defineStore('auth', {
         isLoggedIn: () => {
             return this.isAuthenticated;
         }
-    },
-    actions: {
     }
 });
 export function authStoreHook() {
