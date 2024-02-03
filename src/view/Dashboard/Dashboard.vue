@@ -3,9 +3,10 @@ import * as echarts from 'echarts';
 import { ref, onMounted } from 'vue'
 import TodoList from "../../components/TodoList/TodoList.vue";
 import ClubCard from './components/ClubCard.vue';
-import {usePlayerStore} from "../../stores/playerStore.js";
+import PerfChart from './components/PerfChart.vue';
+import { usePlayerStore } from "../../stores/playerStore.js";
 
-const {PLAYER_POSITION} = usePlayerStore();
+const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
 
 const main = ref()
 
@@ -23,7 +24,7 @@ onMounted(() => {
     series: [
       {
         type: 'bar',
-        data: [5, 12, 8, 5]
+        data: PLAYER_NUMBER
       }
     ]
   });
@@ -34,12 +35,10 @@ onMounted(() => {
 <template>
   <div class="dashboard">
     <div class="row-line">
-      <div class="team-win-percent"></div>
+      <PerfChart />
     </div>
     <div class="club-info-row">
-      <div v-for="position in PLAYER_POSITION" style="width: 22%; height:20vh;">
-      <ClubCard :Position="position"/>
-      </div>
+      <ClubCard v-for="(position, index) in PLAYER_POSITION" :Position="position" :index="index" />
     </div>
     <div class="row-task">
       <TodoList class="todo-list" />
@@ -56,12 +55,6 @@ onMounted(() => {
   width: 100%;
   height: 50vh;
   padding: 10px 20px;
-  .team-win-percent {
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
-  }
 }
 
 .club-info-row {
@@ -97,6 +90,7 @@ onMounted(() => {
   width: 100%;
   height: 50vh;
   padding: 10px 20px;
+
   .global-map {
     width: 100%;
     height: 100%;
