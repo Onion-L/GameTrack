@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue'
 import TodoList from "../../components/TodoList/TodoList.vue";
 import ClubCard from './components/ClubCard.vue';
 import PerfChart from './components/PerfChart.vue';
+import PlayerTable from './components/PlayerTable.vue';
 import { usePlayerStore } from "../../stores/playerStore.js";
 
 const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
@@ -11,23 +12,7 @@ const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
 const main = ref()
 
 onMounted(() => {
-  let myChart = echarts.init(main.value);
-  myChart.setOption({
-    title: {
-      text: 'POSITION'
-    },
-    tooltip: {},
-    xAxis: {
-      data: PLAYER_POSITION
-    },
-    yAxis: {},
-    series: [
-      {
-        type: 'bar',
-        data: PLAYER_NUMBER
-      }
-    ]
-  });
+
 })
 
 </script>
@@ -42,7 +27,9 @@ onMounted(() => {
     </div>
     <div class="row-task">
       <TodoList class="todo-list" />
-      <div ref="main" class="position-chart"></div>
+      <div class="player-table">
+        <PlayerTable />
+      </div>
     </div>
     <div class="row-map">
       <div class="global-map"></div>
@@ -65,12 +52,13 @@ onMounted(() => {
 }
 
 .row-task {
-  height: 55vh;
+  height: 56vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 
-  .position-chart {
+  .player-table {
+    height: 54vh;
     flex: 1;
     display: inline-block;
     text-align: center;
@@ -81,6 +69,7 @@ onMounted(() => {
   }
 
   .todo-list {
+    height: 54vh;
     flex: 0.75;
     margin: 10px 20px 0;
   }

@@ -18,7 +18,7 @@ const tasks = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
         </div>
         <div style="flex: 1;">
-          <el-icon color="#409EFF">
+          <el-icon color="#409EFF" style="margin-right: 10px;">
             <Edit />
           </el-icon>
           <el-icon color="#F56C6C">
@@ -40,9 +40,5 @@ const tasks = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 .todo-content {
   display: flex;
   border-bottom: 1px solid #e4e7ed;
-}
-
-.box-card {
-  width: 480px;
 }
 </style>
