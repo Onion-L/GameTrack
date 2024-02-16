@@ -9,12 +9,6 @@ import { usePlayerStore } from "../../stores/playerStore.js";
 
 const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
 
-const main = ref()
-
-onMounted(() => {
-
-})
-
 </script>
 
 <template>
@@ -25,6 +19,14 @@ onMounted(() => {
     <div class="club-info-row">
       <ClubCard v-for="(position, index) in PLAYER_POSITION" :Position="position" :index="index" />
     </div>
+    <div class="match-info">
+      <div class="match-info-row">
+        <div class="match-info-charts"></div>
+        <div class="match-info-charts"></div>
+        <div class="match-info-charts"></div>
+      </div>
+
+    </div>
     <div class="row-task">
       <TodoList class="todo-list" />
       <div class="player-table">
@@ -32,7 +34,8 @@ onMounted(() => {
       </div>
     </div>
     <div class="row-map">
-      <div class="global-map"></div>
+      <div class="global-map">
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +45,7 @@ onMounted(() => {
   width: 100%;
   height: 50vh;
   padding: 10px 20px;
+  overflow: hidden;
 }
 
 .club-info-row {
@@ -49,6 +53,27 @@ onMounted(() => {
   width: 100%;
   justify-content: space-around;
   margin-top: 10px;
+}
+
+.match-info {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .match-info-row {
+    width: 100%;
+    height: 90%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+
+    .match-info-charts {
+      width: 30%;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+  }
 }
 
 .row-task {

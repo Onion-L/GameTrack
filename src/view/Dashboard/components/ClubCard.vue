@@ -25,7 +25,7 @@ const props = defineProps(['Position', 'index'])
   height: 15vh;
   border-radius: 2px;
   background-color: #fff;
-  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
   align-items: center;
 

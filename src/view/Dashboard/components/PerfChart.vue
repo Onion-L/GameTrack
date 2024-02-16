@@ -1,6 +1,6 @@
 <script setup>
 import * as echarts from 'echarts';
-import { ref, onMounted, onUpdated } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import { useAppStore } from "../../../stores/appStore.js";
 import { storeToRefs } from 'pinia';
 
@@ -15,7 +15,9 @@ onMounted(() => {
 })
 
 watch(sideStatus, () => {
-    console.log(123);
+    nextTick(() => {
+        myChart.resize()
+    })
 })
 
 const initChart = (chart) => {
@@ -55,6 +57,9 @@ const initChart = (chart) => {
         ]
     };
     chart.setOption(option);
+    window.onresize = function () {
+        myChart.resize();
+    }
 }
 </script>
 
@@ -67,6 +72,6 @@ const initChart = (chart) => {
     width: 100%;
     height: 100%;
     background-color: #fff;
-    box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 </style>
