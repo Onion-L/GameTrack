@@ -1,14 +1,12 @@
 <script setup>
-import * as echarts from 'echarts';
-import { ref, onMounted } from 'vue'
 import TodoList from "../../components/TodoList/TodoList.vue";
 import ClubCard from './components/ClubCard.vue';
 import PerfChart from './components/PerfChart.vue';
+import TeamInfoCharts from './components/TeamInfoCharts.vue';
 import PlayerTable from './components/PlayerTable.vue';
 import { usePlayerStore } from "../../stores/playerStore.js";
 
-const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
-
+const { PLAYER_POSITION } = usePlayerStore();
 </script>
 
 <template>
@@ -20,12 +18,7 @@ const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
       <ClubCard v-for="(position, index) in PLAYER_POSITION" :Position="position" :index="index" />
     </div>
     <div class="match-info">
-      <div class="match-info-row">
-        <div class="match-info-charts"></div>
-        <div class="match-info-charts"></div>
-        <div class="match-info-charts"></div>
-      </div>
-
+      <TeamInfoCharts />
     </div>
     <div class="row-task">
       <TodoList class="todo-list" />
@@ -34,8 +27,7 @@ const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
       </div>
     </div>
     <div class="row-map">
-      <div class="global-map">
-      </div>
+      <div class="global-map"></div>
     </div>
   </div>
 </template>
@@ -61,19 +53,6 @@ const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .match-info-row {
-    width: 100%;
-    height: 90%;
-    background-color: #fff;
-    display: flex;
-    justify-content: space-around;
-
-    .match-info-charts {
-      width: 30%;
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    }
-  }
 }
 
 .row-task {
