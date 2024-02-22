@@ -36,6 +36,9 @@ const initChart = (chart) => {
                 show: false
             }
         },
+        tooltip: {
+            trigger: 'axis'
+        },
         title: {
             text: 'Performance',
             left: '5%',

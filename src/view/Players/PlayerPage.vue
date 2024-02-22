@@ -1,17 +1,25 @@
 <script setup>
 import { usePlayerStore } from "../../stores/playerStore.js";
+import { useRouter } from 'vue-router';
+const { PLAYER_POSITION, PLAYER_NUMBER, player_data, playerCounts, playersByPosition } = usePlayerStore();
+const router = useRouter();
 
-const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
+const goToTragetRoute = (id) => {
+  router.push(`/detail/${id}`)
+}
+
+console.log(playerCounts);
 </script>
 
 <template>
-  <div class="position_title" v-for="(position, index) in PLAYER_POSITION">
+  <div class="position_title" v-for="(players, position) in playersByPosition" :key="position">
     <h1>{{ position }}</h1>
     <hr style="width: 90%;">
     <div class="card-container">
-      <div class="player-card" v-for="number in PLAYER_NUMBER[index]">
+      <div @click="goToTragetRoute(player.id)" class="player-card" v-for="player in players" :key="player.name"
+        :style="{ backgroundImage: 'url(' + player.image + ')' }">
         <div class="player-title">
-          <span class="player-name">Antony</span>
+          <span class="player-name">{{ player.name }}</span>
         </div>
       </div>
     </div>
@@ -29,15 +37,15 @@ const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
 
     .player-card {
       position: relative;
-      width: 20%;
+      width: 30%;
       height: 50vh;
       background-color: #fff;
       margin: 10px;
       border-radius: 10px;
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-      background-image: url('../../assets//images/profile-1.jpg');
       background-size: cover;
       background-position: center;
+      transition: background-size 0.8s ease-in;
 
       .player-title {
         position: absolute;
@@ -48,6 +56,7 @@ const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
         align-items: center;
         padding: 10px;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1));
+        border-radius: 10px;
 
         .player-name {
           font-size: 24px;
@@ -55,6 +64,10 @@ const { PLAYER_POSITION, PLAYER_NUMBER } = usePlayerStore();
           color: #fff;
         }
       }
+    }
+
+    .player-card:hover {
+      background-size: 120%;
     }
   }
 

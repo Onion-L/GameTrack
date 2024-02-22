@@ -1,7 +1,7 @@
 <script setup>
 import { usePlayerStore } from '../../../stores/playerStore';
 
-const { PLAYER_NUMBER } = usePlayerStore();
+const { playerCounts } = usePlayerStore();
 const props = defineProps(['Position', 'index'])
 </script>
 
@@ -13,7 +13,7 @@ const props = defineProps(['Position', 'index'])
       </div>
       <div class="player-number">
         <p class="card-category">{{ props.Position }}</p>
-        <h3 class="card-title">{{ PLAYER_NUMBER[props.index] }}</h3>
+        <h3 class="card-title">{{ playerCounts[props.Position] }}</h3>
       </div>
     </div>
   </div>

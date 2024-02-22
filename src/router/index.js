@@ -5,6 +5,7 @@ import HomePage from "../page/Home/HomePage.vue";
 import Dashboard from "../view/Dashboard/Dashboard.vue";
 import TeamPage from "../view/Teams/TeamPage.vue";
 import PlayerPage from "../view/Players/PlayerPage.vue";
+import PlayerDetailPage from "../view/PlayerDetail/PlayerDetailPage.vue";
 import AnalysisPage from "../view/Analysis/AnalysisPage.vue";
 import SettingPage from "../view/Settings/SettingPage.vue";
 import { authStoreHook } from "../stores/authStore.js";
@@ -37,6 +38,10 @@ const constantRoutes = [
 				component: AnalysisPage
 			}
 		]
+	},
+	{
+		path: "/detail/:id",
+		component: PlayerDetailPage
 	},
 	{
 		name: "Login",

@@ -1,14 +1,10 @@
 <template>
-  <el-form
-      :model="formInfoData"
-      style="max-width: 460px"
-      class="easy-form"
-  >
+  <el-form :model="formInfoData" style="max-width: 460px" class="easy-form">
     <el-form-item>
-      <el-input v-model="formInfoData.username" placeholder="Username"/>
+      <el-input v-model="formInfoData.username" placeholder="Username" />
     </el-form-item>
     <el-form-item>
-      <el-input type="password" v-model="formInfoData.password" placeholder="Password"/>
+      <el-input type="password" v-model="formInfoData.password" placeholder="Password" />
     </el-form-item>
     <el-form-item>
       <el-checkbox v-model="userStored">Remember me</el-checkbox>
@@ -18,7 +14,7 @@
 </template>
 
 <script setup>
-import http from "../../../../utils/api.js";
+// import http from "../../../../utils/api.js";
 
 const props = defineProps(["submitHandle"]);
 
@@ -28,19 +24,19 @@ const formInfoData = reactive({
 })
 const userStored = ref(false);
 const loginHandle = () => {
-  props.submitHandle(formInfoData,userStored);
+  props.submitHandle(formInfoData, userStored);
 }
 
 </script>
 
 <style lang="scss">
-  .el-button {
-    width: 100%;
-    height: 42px;
-  }
+.el-button {
+  width: 100%;
+  height: 42px;
+}
 
-  .el-input {
-    height: 60px;
-    width: 100%;
-  }
+.el-input {
+  height: 60px;
+  width: 100%;
+}
 </style>

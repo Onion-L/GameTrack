@@ -9,6 +9,7 @@ import "./mock/index.js";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import router from "./router/index.js";
 import store from "./stores/index";
+
 /*
 if(import.meta.env.VITE_USE_MOCK === 'true') {
 import ("./mock/index.js");

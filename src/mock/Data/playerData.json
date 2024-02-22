@@ -1,0 +1,153 @@
+[
+    {
+      "name": "Tom Heaton",
+      "nationality": "English",
+      "date_of_birth": "1986-04-15",
+      "height": "1.88m",
+      "position": "Goalkeeper",
+      "joined_date": "2021-07-02",
+      "previous_clubs": ["Aston Villa", "Burnley"],
+      "achievements": ["Championship Play-Off Winner"]
+    },
+    {
+      "name": "André Onana",
+      "nationality": "Cameroonian",
+      "date_of_birth": "1996-04-02",
+      "height": "1.90m",
+      "position": "Goalkeeper",
+      "joined_date": "2022-08-11",
+      "previous_clubs": ["Ajax", "Barcelona B"],
+      "achievements": ["Eredivisie Champion", "UEFA Champions League Semi-finalist"]
+    },
+    {
+      "name": "Altay Bayindir",
+      "nationality": "Turkish",
+      "date_of_birth": "1998-04-14",
+      "height": "1.97m",
+      "position": "Goalkeeper",
+      "joined_date": "2023-01-07",
+      "previous_clubs": ["Fenerbahçe", "MKE Ankaragücü"],
+      "achievements": ["Turkish Cup Runner-up"]
+    },
+    {
+        "name": "Victor Lindelöf",
+        "nationality": "Swedish",
+        "date_of_birth": "1994-07-17",
+        "height": "1.87m",
+        "position": "Defender",
+        "joined_date": "2017-07-01",
+        "previous_clubs": ["Benfica", "Västerås SK"],
+        "achievements": ["UEFA Europa League Winner"]
+    },
+    {
+        "name": "Harry Maguire",
+        "nationality": "English",
+        "date_of_birth": "1993-03-05",
+        "height": "1.94m",
+        "position": "Defender",
+        "joined_date": "2019-08-05",
+        "previous_clubs": ["Leicester City", "Hull City"],
+        "achievements": ["FA Cup Runner-up"]
+    },
+    {
+        "name": "Lisandro Martínez",
+        "nationality": "Argentinian",
+        "date_of_birth": "1998-01-18",
+        "height": "1.75m",
+        "position": "Defender",
+        "joined_date": "2022-07-27",
+        "previous_clubs": ["Ajax", "Defensa y Justicia"],
+        "achievements": ["Eredivisie Champion", "Copa Sudamericana Winner"]
+    },
+    {
+        "name": "Tyrell Malacia",
+        "nationality": "Dutch",
+        "date_of_birth": "1999-08-17",
+        "height": "1.69m",
+        "position": "Defender",
+        "joined_date": "2022-07-01",
+        "previous_clubs": ["Feyenoord"],
+        "achievements": ["KNVB Cup Winner"]
+    },
+    {
+        "name": "Raphaël Varane",
+        "nationality": "French",
+        "date_of_birth": "1993-04-25",
+        "height": "1.91m",
+        "position": "Defender",
+        "joined_date": "2021-07-29",
+        "previous_clubs": ["Real Madrid", "Lens"],
+        "achievements": ["FIFA World Cup Winner", "UEFA Champions League Winner x4"]
+    },
+    {
+        "name": "Diogo Dalot",
+        "nationality": "Portuguese",
+        "date_of_birth": "1999-03-18",
+        "height": "1.83m",
+        "position": "Defender",
+        "joined_date": "2018-07-01",
+        "previous_clubs": ["Porto"],
+        "achievements": ["UEFA Europa League Runner-up"]
+    },
+    {
+        "name": "Bruno Fernandes",
+        "nationality": "Portuguese",
+        "date_of_birth": "1994-09-08",
+        "height": "1.79m",
+        "position": "Midfielder",
+        "joined_date": "2020-01-29",
+        "previous_clubs": ["Sporting CP", "Sampdoria"],
+        "achievements": ["Premier League Player of the Month", "Europa League Top Scorer"]
+    },
+    {
+        "name": "Christian Eriksen",
+        "nationality": "Danish",
+        "date_of_birth": "1992-02-14",
+        "height": "1.82m",
+        "position": "Midfielder",
+        "joined_date": "2022-07-15",
+        "previous_clubs": ["Inter Milan", "Tottenham Hotspur"],
+        "achievements": ["Serie A Winner", "EFL Cup Runner-up"]
+    },
+    {
+        "name": "Casemiro",
+        "nationality": "Brazilian",
+        "date_of_birth": "1992-02-23",
+        "height": "1.85m",
+        "position": "Midfielder",
+        "joined_date": "2022-08-19",
+        "previous_clubs": ["Real Madrid", "Porto"],
+        "achievements": ["UEFA Champions League Winner x4", "La Liga Winner"]
+      },
+      {
+        "name": "Scott McTominay",
+        "nationality": "Scottish",
+        "date_of_birth": "1996-12-08",
+        "height": "1.93m",
+        "position": "Midfielder",
+        "joined_date": "2017-04-30",
+        "previous_clubs": ["Manchester United Youth"],
+        "achievements": ["UEFA Europa League Winner"]
+      },
+      {
+        "name": "Antony",
+        "nationality": "Brazilian",
+        "date_of_birth": "2000-02-24",
+        "height": "1.72m",
+        "position": "Forward",
+        "joined_date": "2022-08-30",
+        "previous_clubs": ["Ajax", "São Paulo FC"],
+        "achievements": ["Eredivisie Champion"]
+      },
+      {
+        "name": "Alejandro Garnacho",
+        "nationality": "Argentinian",
+        "date_of_birth": "2004-07-01",
+        "height": "1.78m",
+        "position": "Forward",
+        "joined_date": "2021-11-25",
+        "previous_clubs": ["Manchester United Youth"],
+        "achievements": ["UEFA Youth League Top Scorer"]
+      }   
+  ]
+  

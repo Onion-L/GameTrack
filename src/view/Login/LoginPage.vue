@@ -1,10 +1,12 @@
 <script setup>
 import EasyForm from "./components/EasyForm/EasyForm.vue";
 import { Moon, Sunny } from "@element-plus/icons-vue";
-import http from "../../utils/api.js";
+import $http from "../../utils/http.js";
 import Cookie from 'js-cookie';
 import { useRouter } from "vue-router";
+import { usePlayerStore } from "../../stores/playerStore.js";
 
+const { fetchPlayerData, player_data } = usePlayerStore();
 const router = useRouter();
 const remember = ref(false);
 
@@ -15,7 +17,7 @@ const switchTheme = () => {
 const submitHandle = (formData, userStored) => {
   console.log(formData)
   /**{TODO}*/
-  http.post('/login', formData)
+  $http.post('/login', formData)
     .then(response => {
       console.log(response);
       if (response.data.code === 200) {
@@ -27,6 +29,9 @@ const submitHandle = (formData, userStored) => {
           path: '/'
         });
       }
+    })
+    .then(_ => {
+      fetchPlayerData();
     });
 };
 </script>
@@ -34,8 +39,8 @@ const submitHandle = (formData, userStored) => {
 <template>
   <div class="login-container">
     <div class="login-image"></div>
-    <div :class="[remember?'login-side-container--dark':'login-side-container--light']">
-      <el-switch v-model="remember" :active-action-icon="Moon" :inactive-action-icon="Sunny" @click="switchTheme"/>
+    <div :class="[remember ? 'login-side-container--dark' : 'login-side-container--light']">
+      <el-switch v-model="remember" :active-action-icon="Moon" :inactive-action-icon="Sunny" @click="switchTheme" />
       <div class="login-side-wrapper">
         <div class="gt-logo-container">
           <img class="gt-logo-img" src="../../assets/images/logo.png" alt="logo">
@@ -50,48 +55,47 @@ const submitHandle = (formData, userStored) => {
 
 <style lang="scss">
 @import "../../style/variable.scss";
+
 %tip-line {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    min-width: 400px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
 
-    .el-switch {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-    }
-
-    .gt-logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 40px;
-    }
-
-    .gt-logo-img {
-      width: 50px;
-      height: auto;
-    }
-
-    .gt-logo-title {
-      font-family: 'Caveat', cursive;
-      text-align: center;
-      margin-left: 10px;
-    }
-
-    .easy-form {
-      margin-top: 30px;
-      width: 100%;
-    }
+  .el-switch {
+    position: absolute;
+    top: 20px;
+    right: 30px;
   }
+
+  .gt-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .gt-logo-img {
+    width: 50px;
+    height: auto;
+  }
+
+  .gt-logo-title {
+    font-family: 'Caveat', cursive;
+    text-align: center;
+    margin-left: 10px;
+  }
+
+  .easy-form {
+    margin-top: 30px;
+    width: 100%;
+  }
+}
 
 @font-face {
   font-family: 'Caveat';
-  //font-family: 'Bungee Spice';
-  //font-family: 'Nabla';
   src: url('../../assets/fonts/Caveat-Bold.ttf');
 }
 
@@ -123,7 +127,7 @@ const submitHandle = (formData, userStored) => {
   .login-side-container--dark {
     @extend %tip-line;
     background: url("../../assets/images/login-bg-dark.png");
-    color:#fff;
+    color: #fff;
   }
 
   .login-side-container--light {
@@ -131,5 +135,5 @@ const submitHandle = (formData, userStored) => {
     background-color: $gt-website-theme--light;
   }
 }
-
 </style>
+../../utils/http.js
