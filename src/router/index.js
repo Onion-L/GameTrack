@@ -34,14 +34,30 @@ const constantRoutes = [
 				component: PlayerPage
 			},
 			{
+				path: "players/:id",
+				component: PlayerDetailPage
+			},
+			{
 				path: "analysis",
 				component: AnalysisPage
 			}
 		]
 	},
 	{
-		path: "/detail/:id",
-		component: PlayerDetailPage
+		path: "/players/dashboard",
+		redirect: "/dashboard"
+	},
+	{
+		path: "/players/players",
+		redirect: "/players"
+	},
+	{
+		path: "/players/analysis",
+		redirect: "/analysis"
+	},
+	{
+		path: "/players/teams",
+		redirect: "/teams"
 	},
 	{
 		name: "Login",

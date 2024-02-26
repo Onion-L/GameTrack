@@ -4,8 +4,9 @@ import { useRouter } from 'vue-router';
 const { PLAYER_POSITION, PLAYER_NUMBER, player_data, playerCounts, playersByPosition } = usePlayerStore();
 const router = useRouter();
 
-const goToTragetRoute = (id) => {
-  router.push(`/detail/${id}`)
+const goToTragetRoute = (id, position, index) => {
+  console.log(index);
+  router.push(`/players/${id}`)
 }
 
 console.log(playerCounts);
@@ -16,8 +17,8 @@ console.log(playerCounts);
     <h1>{{ position }}</h1>
     <hr style="width: 90%;">
     <div class="card-container">
-      <div @click="goToTragetRoute(player.id)" class="player-card" v-for="player in players" :key="player.name"
-        :style="{ backgroundImage: 'url(' + player.image + ')' }">
+      <div @click="goToTragetRoute(player.id, position, index)" class="player-card" v-for="(player, index) in players"
+        :key="player.name" :style="{ backgroundImage: 'url(' + player.image + ')' }">
         <div class="player-title">
           <span class="player-name">{{ player.name }}</span>
         </div>
@@ -57,6 +58,12 @@ console.log(playerCounts);
         padding: 10px;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1));
         border-radius: 10px;
+
+        .player-number {
+          font-size: 24px;
+          font-weight: bolder;
+          color: #fff;
+        }
 
         .player-name {
           font-size: 24px;
