@@ -4,8 +4,7 @@ import { useRouter } from 'vue-router';
 const { PLAYER_POSITION, PLAYER_NUMBER, player_data, playerCounts, playersByPosition } = usePlayerStore();
 const router = useRouter();
 
-const goToTragetRoute = (id, position, index) => {
-  console.log(index);
+const goToTragetRoute = (id) => {
   router.push(`/players/${id}`)
 }
 

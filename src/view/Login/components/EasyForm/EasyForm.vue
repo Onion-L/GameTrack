@@ -14,8 +14,6 @@
 </template>
 
 <script setup>
-// import http from "../../../../utils/api.js";
-
 const props = defineProps(["submitHandle"]);
 
 const formInfoData = reactive({

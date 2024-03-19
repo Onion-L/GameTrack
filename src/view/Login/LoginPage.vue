@@ -17,9 +17,9 @@ const switchTheme = () => {
 const submitHandle = (formData, userStored) => {
   console.log(formData)
   /**{TODO}*/
-  $http.post('/login', formData)
+  $http.post('/api/login', formData)
     .then(response => {
-      console.log(response);
+      console.log(123);
       if (response.data.code === 200) {
         if (userStored) {
           // document.cookie =`username=${response.data.data.username}; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/`;
@@ -32,6 +32,9 @@ const submitHandle = (formData, userStored) => {
     })
     .then(_ => {
       fetchPlayerData();
+    })
+    .catch(_ => {
+      console.error('Login Error');
     });
 };
 </script>

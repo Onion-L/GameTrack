@@ -113,7 +113,6 @@ onMounted(() => {
 }
 
 .match-stats {
-
     .stats-header {
         font-size: 40px;
         color: #717171;
