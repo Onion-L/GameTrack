@@ -1,12 +1,13 @@
 <script setup>
 import { usePlayerStore } from "../../stores/playerStore.js";
 import { useRouter } from 'vue-router';
-const { PLAYER_POSITION, PLAYER_NUMBER, player_data, playerCounts, playersByPosition } = usePlayerStore();
+const { player_data, playerCounts, playersByPosition } = usePlayerStore();
 const router = useRouter();
 
 const goToTragetRoute = (id) => {
-  router.push(`/players/${id}`)
+  router.push(`/players/${id}`);
 }
+console.log('!!', player_data);
 
 console.log(playerCounts);
 </script>
@@ -16,8 +17,8 @@ console.log(playerCounts);
     <h1>{{ position }}</h1>
     <hr style="width: 90%;">
     <div class="card-container">
-      <div @click="goToTragetRoute(player.id, position, index)" class="player-card" v-for="(player, index) in players"
-        :key="player.name" :style="{ backgroundImage: 'url(' + player.image + ')' }">
+      <div @click="goToTragetRoute(player.id)" class="player-card" v-for="(player, index) in players" :key="player.name"
+        :style="{ backgroundImage: 'url(' + player.image + ')' }">
         <div class="player-title">
           <span class="player-name">{{ player.name }}</span>
         </div>

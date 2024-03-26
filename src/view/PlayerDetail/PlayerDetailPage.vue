@@ -13,9 +13,10 @@ const route = useRoute();
 const { id } = route.params;
 const { stats } = player_data[id];
 
+
 onMounted(() => {
     sideStatus.value = true;
-})
+});
 
 </script>
 <template>

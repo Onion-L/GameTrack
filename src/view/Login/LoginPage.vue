@@ -8,22 +8,20 @@ import { usePlayerStore } from "../../stores/playerStore.js";
 
 const { fetchPlayerData, player_data } = usePlayerStore();
 const router = useRouter();
-const remember = ref(false);
+const switchTheme = ref(false);
 
-const switchTheme = () => {
-  console.log(remember.value)
-}
 
 const submitHandle = (formData, userStored) => {
   console.log(formData)
   /**{TODO}*/
-  $http.post('/api/login', formData)
+  $http.post('/auth/login', { ...formData, isRemembered: userStored })
     .then(response => {
-      console.log(123);
+      console.log(123, response.data);
       if (response.data.code === 200) {
+        localStorage.setItem('gt-user', response.data.token)
         if (userStored) {
           // document.cookie =`username=${response.data.data.username}; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/`;
-          Cookie.set('username', response.data.data.username, { expires: 7 });
+          // Cookie.set('username', response.data.data.username, { expires: 7 });
         }
         router.replace({
           path: '/'
@@ -33,8 +31,8 @@ const submitHandle = (formData, userStored) => {
     .then(_ => {
       fetchPlayerData();
     })
-    .catch(_ => {
-      console.error('Login Error');
+    .catch(error => {
+      console.error(error.message);
     });
 };
 </script>
@@ -42,8 +40,8 @@ const submitHandle = (formData, userStored) => {
 <template>
   <div class="login-container">
     <div class="login-image"></div>
-    <div :class="[remember ? 'login-side-container--dark' : 'login-side-container--light']">
-      <el-switch v-model="remember" :active-action-icon="Moon" :inactive-action-icon="Sunny" @click="switchTheme" />
+    <div :class="[switchTheme ? 'login-side-container--dark' : 'login-side-container--light']">
+      <el-switch v-model="switchTheme" :active-action-icon="Moon" :inactive-action-icon="Sunny" />
       <div class="login-side-wrapper">
         <div class="gt-logo-container">
           <img class="gt-logo-img" src="../../assets/images/logo.png" alt="logo">

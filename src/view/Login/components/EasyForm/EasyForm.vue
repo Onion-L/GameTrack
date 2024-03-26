@@ -1,3 +1,23 @@
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const props = defineProps(["submitHandle"]);
+const formInfoData = reactive({
+  username: '',
+  password: '',
+});
+const userStored = ref(false);
+
+const loginHandle = () => {
+  props.submitHandle(formInfoData, userStored.value);
+};
+
+const registerLink = () => {
+  router.push('register');
+};
+</script>
+
 <template>
   <el-form :model="formInfoData" style="max-width: 460px" class="easy-form">
     <el-form-item>
@@ -9,28 +29,18 @@
     <el-form-item>
       <el-checkbox v-model="userStored">Remember me</el-checkbox>
     </el-form-item>
-    <el-button type="primary" @click="loginHandle">Sign In</el-button>
+    <div class="btn-container">
+      <el-button type="primary" @click="loginHandle">Sign In</el-button>
+      <el-button @click="registerLink" plain>Sign Up</el-button>
+    </div>
   </el-form>
 </template>
 
-<script setup>
-const props = defineProps(["submitHandle"]);
-
-const formInfoData = reactive({
-  username: '',
-  password: '',
-})
-const userStored = ref(false);
-const loginHandle = () => {
-  props.submitHandle(formInfoData, userStored);
-}
-
-</script>
-
 <style lang="scss">
-.el-button {
+.btn-container {
   width: 100%;
   height: 42px;
+  display: flex;
 }
 
 .el-input {

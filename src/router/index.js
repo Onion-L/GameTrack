@@ -8,8 +8,8 @@ import PlayerPage from "../view/Players/PlayerPage.vue";
 import PlayerDetailPage from "../view/PlayerDetail/PlayerDetailPage.vue";
 import AnalysisPage from "../view/Analysis/AnalysisPage.vue";
 import SettingPage from "../view/Settings/SettingPage.vue";
-import { authStoreHook } from "../stores/authStore.js";
 import ErrorPage from "../page/Error/ErrorPage.vue";
+import RegisterPage from "../view/Register/RegisterPage.vue";
 
 const constantRoutes = [
 	{
@@ -60,9 +60,17 @@ const constantRoutes = [
 		redirect: "/teams"
 	},
 	{
-		name: "Login",
-		path: "/login",
-		component: LoginPage
+		path: "/auth",
+		children: [
+			{
+				path: "login",
+				component: LoginPage
+			},
+			{
+				path: "register",
+				component: RegisterPage
+			}
+		]
 	},
 	{
 		path: "/settings",

@@ -57,9 +57,12 @@ export const usePlayerStore = defineStore("player", {
 	},
 	actions: {
 		async fetchPlayerData() {
-			const response = await $http.get("/api/players");
+			const response = await $http.get("/api/players", {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("gt-user")}`
+				}
+			});
 			this.player_data = response.data;
-			console.log(this.player_data[0].name);
 		}
 	},
 	persist: {
