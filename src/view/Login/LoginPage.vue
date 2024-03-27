@@ -12,20 +12,15 @@ const switchTheme = ref(false);
 
 
 const submitHandle = (formData, userStored) => {
-  console.log(formData)
-  /**{TODO}*/
   $http.post('/auth/login', { ...formData, isRemembered: userStored })
     .then(response => {
-      console.log(123, response.data);
+      if (localStorage.getItem("gt-user")) {
+        localStorage.clear();
+      }
       if (response.data.code === 200) {
-        localStorage.setItem('gt-user', response.data.token)
-        if (userStored) {
-          // document.cookie =`username=${response.data.data.username}; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/`;
-          // Cookie.set('username', response.data.data.username, { expires: 7 });
-        }
-        router.replace({
-          path: '/'
-        });
+        router.replace('/dashboard');
+        localStorage.setItem('gt-user', response.data.token);
+
       }
     })
     .then(_ => {

@@ -3,55 +3,99 @@ import $http from "../../utils/http.js";
 import Cookie from 'js-cookie';
 import { useRouter } from "vue-router";
 import { usePlayerStore } from "../../stores/playerStore.js";
+import { passwordRule, emailRule } from "../../utils/valid";
 
 const registerInfo = reactive({
     username: '',
     password: '',
+    confirmPwd: '',
     email: ''
 });
 
-const registerHandle = (formData, userStored) => {
-    console.log(formData)
-    /**{TODO}*/
-    $http.post('/auth/register', formData)
-        .then(response => {
-            if (response.data.code === 200) {
-                if (userStored) {
-                    // document.cookie =`username=${response.data.data.username}; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/`;
-                    // Cookie.set('username', response.data.data.username, { expires: 7 });
+const router = useRouter();
+const errorMessage = ref("");
+const isError = ref(false);
+const FormEl = ref();
+
+const rules = reactive({
+    username: [{ required: true, message: 'Please provide a username', trigger: 'blur' }],
+    password: [
+        { required: true, message: 'Please provide a password', trigger: 'blur' },
+        {
+            validator: passwordRule, trigger: 'blur'
+        }
+    ],
+    confirmPwd: [
+        { required: true, message: 'Please confirm your password', trigger: 'blur' },
+        {
+            validator: (rule, value, callback) => {
+                if (value !== registerInfo.password) {
+                    callback(new Error('Password and confirm password do not match'));
+                } else {
+                    callback();
                 }
-                router.replace({
-                    path: '/'
+            }, trigger: 'blur'
+        }
+    ],
+    email: [
+        { required: true, message: 'Please input your email', trigger: 'blur' },
+        {
+            validator: emailRule, trigger: 'blur'
+        }
+    ]
+});
+
+const registerHandle = (formEl, registerInfo) => {
+    isError.value = false;
+    errorMessage.value = "";
+    if (!formEl) return;
+    formEl.validate((valid) => {
+        if (valid) {
+            console.log(registerInfo);
+            /**{TODO}*/
+            $http.post('/auth/register', registerInfo)
+                .then(_ => {
+                    router.push('/auth/login');
+                })
+                .catch(error => {
+                    isError.value = true;
+                    errorMessage.value = error.response.data.message;
+                    console.error(error.response.data.message);
                 });
-            }
-        })
-        .then(_ => {
-            fetchPlayerData();
-        })
-        .catch(_ => {
-            console.error('Login Error');
-        });
+        } else {
+            console.log('error submit!');
+            return false;
+        }
+    });
 };
 </script>
 
 <template>
+    <div class="alert-container" v-if="isError" style="max-width: 600px">
+        <el-alert :title="errorMessage" type="error" />
+    </div>
     <div class="register-container">
         <div class="title-container">
             <img class="title-img" src="../../assets/images/logo.png" />
             <h1>GameTrack</h1>
         </div>
-        <el-form :model="formInfoData" style="max-width: 460px" class="easy-form">
-            <el-form-item>
-                <el-input v-model="registerInfo.username" placeholder="Username" />
-            </el-form-item>
-            <el-form-item>
-                <el-input type="password" v-model="registerInfo.password" placeholder="Password" />
-            </el-form-item>
-            <el-form-item>
-                <el-input v-model="registerInfo.email" placeholder="Email" />
-            </el-form-item>
-            <el-button type="primary" @click="registerHandle">Submit</el-button>
-        </el-form>
+        <div class="form-container">
+            <el-form :model="registerInfo" class="easy-form" :rules="rules" ref="FormEl">
+                <el-form-item prop="username">
+                    <el-input v-model="registerInfo.username" placeholder="Username" />
+                </el-form-item>
+                <el-form-item prop="password">
+                    <el-input type="password" v-model="registerInfo.password" placeholder="Password" />
+                </el-form-item>
+                <el-form-item prop="confirmPwd">
+                    <el-input type="password" v-model="registerInfo.confirmPwd" placeholder="Confirm Password" />
+                </el-form-item>
+                <el-form-item prop="email">
+                    <el-input v-model="registerInfo.email" placeholder="Email" />
+                </el-form-item>
+                <el-button type="primary" @click="registerHandle(FormEl, registerInfo)">Submit</el-button>
+            </el-form>
+        </div>
     </div>
 </template>
 
@@ -59,8 +103,23 @@ const registerHandle = (formData, userStored) => {
 <style lang="scss">
 @import "../../style/variable.scss";
 
+.alert-container {
+    position: absolute;
+    width: 30%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+}
+
 .register-container {
-    width: 30vw;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    background-image: url('../../assets/images/register-background.webp');
+    background-position: center;
+    background-size: cover;
 }
 
 .title-container {
@@ -73,13 +132,18 @@ const registerHandle = (formData, userStored) => {
     }
 }
 
-.el-button {
-    width: 100%;
-    height: 42px;
-}
+.form-container {
+    width: 35%;
+    margin-top: 20px;
 
-.el-input {
-    height: 60px;
-    width: 100%;
+    .el-button {
+        width: 100%;
+        height: 42px;
+    }
+
+    .el-input {
+        height: 60px;
+        width: 100%;
+    }
 }
 </style>
