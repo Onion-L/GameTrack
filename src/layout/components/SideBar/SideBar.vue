@@ -29,11 +29,11 @@ const { sideStatus } = storeToRefs(appStore);
             </el-icon>
             <span>Dashboard</span>
           </el-menu-item>
-          <el-menu-item index="teams">
+          <el-menu-item index="matches">
             <el-icon>
               <Grid />
             </el-icon>
-            <span>Teams</span>
+            <span>Match</span>
           </el-menu-item>
           <el-menu-item index="players">
             <el-icon>
@@ -47,11 +47,11 @@ const { sideStatus } = storeToRefs(appStore);
             </el-icon>
             <span>Analysis</span>
           </el-menu-item>
-          <el-menu-item index="more">
+          <el-menu-item index="team">
             <el-icon>
-              <More />
+              <Tools />
             </el-icon>
-            <span>More</span>
+            <span>Team</span>
           </el-menu-item>
         </el-menu>
       </el-col>
@@ -63,7 +63,6 @@ const { sideStatus } = storeToRefs(appStore);
 @import "../../../style/variable.scss";
 
 .sidebar-wrapper {
-  //width: $gt-side-bar-width--expend;
   height: $gt-side-bar-height;
 }
 

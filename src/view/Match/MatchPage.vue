@@ -1,12 +1,11 @@
 <script setup>
 import $http from "../../utils/http.js";
-import TeamStatistics from './components/TeamStatistics.vue';
+import MatchStatistics from './components/MatchStatistics.vue';
 
 const matchResult = ref([]);
 const dialogVisible = ref(false);
 const statsResult = ref({});
 const statsKey = ref([]);
-const totalGoals = ref(0);
 const statsValue = reactive({
     totalGoals: 0,
     totalWinNum: 0,
@@ -16,6 +15,7 @@ const statsValue = reactive({
     totalYellowCards: 0,
     totalRedCards: 0,
 })
+
 onMounted(() => {
     $http.get('/api/matches', {
         headers: {
@@ -47,7 +47,7 @@ const handleRowClick = (row) => {
     <div class="team-card">
 
         <div class="stats-container">
-            <TeamStatistics :statsValue="statsValue" />
+            <MatchStatistics :statsValue="statsValue" />
         </div>
 
         <el-dialog v-model="dialogVisible" title="Tips" width="500">
