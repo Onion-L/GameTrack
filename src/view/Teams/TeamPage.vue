@@ -1,41 +1,53 @@
 <script setup>
 import $http from "../../utils/http.js";
 import TeamStatistics from './components/TeamStatistics.vue';
-import MatchDetail from './components/MatchDetail.vue';
 
-const value1 = ref('');
 const matchResult = ref([]);
 const dialogVisible = ref(false);
 const statsResult = ref({});
 const statsKey = ref([]);
-
+const totalGoals = ref(0);
+const statsValue = reactive({
+    totalGoals: 0,
+    totalWinNum: 0,
+    totalDrawNum: 0,
+    averagePassNum: 0,
+    averagePassAccuracy: 0,
+    totalYellowCards: 0,
+    totalRedCards: 0,
+})
 onMounted(() => {
     $http.get('/api/matches', {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("gt-user")}`,
         },
     }).then(response => {
-        matchResult.value = response.data;
-        console.log(response.data);
+        matchResult.value = response.data.match;
+        for (const key in response.data.summary) {
+            if (statsValue.hasOwnProperty(key)) {
+                statsValue[key] = response.data.summary[key];
+            } else {
+                console.log(key);
+            }
+        }
+        console.log(statsValue.averagePassNum);
+    }).catch(e => {
+        console.error(e.message);
     })
 });
 
 const handleRowClick = (row) => {
     statsKey.value = Object.keys(row.stats);
     dialogVisible.value = true;
-    console.log(row.stats);
-    console.log(statsKey);
     statsResult.value = row.stats;
 }
-
-
 </script>
 
 <template>
     <div class="team-card">
 
         <div class="stats-container">
-            <TeamStatistics />
+            <TeamStatistics :statsValue="statsValue" />
         </div>
 
         <el-dialog v-model="dialogVisible" title="Tips" width="500">
@@ -63,7 +75,7 @@ const handleRowClick = (row) => {
                     <el-table-column label="Result">
                         <template #default="scope">
                             <el-tag v-if="scope.row.result === 'win'" type="success">{{
-            scope.row.result }}</el-tag>
+                scope.row.result }}</el-tag>
                             <el-tag v-else-if="scope.row.result === 'draw'" type="warning">{{ scope.row.result
                                 }}</el-tag>
 

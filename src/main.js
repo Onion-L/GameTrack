@@ -10,16 +10,11 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import router from "./router/index.js";
 import store from "./stores/index";
 
-/*
-if(import.meta.env.VITE_USE_MOCK === 'true') {
-import ("./mock/index.js");
-}*/
-
 const app = createApp(App);
 app.use(router).use(store);
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-	app.component(key, component);
+  app.component(key, component);
 }
 
 app.mount("#app");

@@ -70,7 +70,7 @@ export const usePlayerStore = defineStore("player", {
     strategies: [
       {
         key: "my-store",
-        storage: localStorage, // 或 sessionStorage
+        storage: localStorage,
       },
     ],
   },
