@@ -1,5 +1,6 @@
 //系统主题
 $gt-website-theme--light: #fff;
+$gt-team-theme:#d20222;
 
 //侧边栏
 $gt-side-bar-width--expend:14vw;
@@ -12,3 +13,5 @@ $gt-nav-bar-height: 50px;
 $gt-right-width--expend: calc(101vw - $gt-side-bar-width--expend);
 $gt-right-width--collapse: calc(100vw - 60px);
 $gt-main-height: calc(100vh - 60px);
+
+$gt-container-box-shadow:rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;

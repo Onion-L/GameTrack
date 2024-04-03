@@ -32,6 +32,7 @@ const { sideStatus } = storeToRefs(appStore);
   height: $gt-nav-bar-height;
   background-color: $gt-side-bar-bg-color;
 
+
   .gt-logo-img {
     width: 50px;
     height: auto;

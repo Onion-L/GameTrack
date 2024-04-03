@@ -11,7 +11,7 @@ const { sideStatus } = storeToRefs(appStore);
 
 onMounted(() => {
   console.log(Cookie.get('username'))
-})
+});
 </script>
 
 <template>

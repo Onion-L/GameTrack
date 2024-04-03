@@ -12,79 +12,79 @@ import ErrorPage from "../page/Error/ErrorPage.vue";
 import RegisterPage from "../view/Register/RegisterPage.vue";
 
 const constantRoutes = [
-	{
-		path: "/home",
-		component: HomePage
-	},
-	{
-		path: "/",
-		component: LayOut,
-		redirect: "/dashboard",
-		children: [
-			{
-				path: "dashboard",
-				component: Dashboard
-			},
-			{
-				path: "teams",
-				component: TeamPage
-			},
-			{
-				path: "players",
-				component: PlayerPage
-			},
-			{
-				path: "players/:id",
-				component: PlayerDetailPage
-			},
-			{
-				path: "analysis",
-				component: AnalysisPage
-			}
-		]
-	},
-	{
-		path: "/players/dashboard",
-		redirect: "/dashboard"
-	},
-	{
-		path: "/players/players",
-		redirect: "/players"
-	},
-	{
-		path: "/players/analysis",
-		redirect: "/analysis"
-	},
-	{
-		path: "/players/teams",
-		redirect: "/teams"
-	},
-	{
-		path: "/auth",
-		children: [
-			{
-				path: "login",
-				component: LoginPage
-			},
-			{
-				path: "register",
-				component: RegisterPage
-			}
-		]
-	},
-	{
-		path: "/settings",
-		component: SettingPage
-	},
-	{
-		path: "/:pathMatch(.*)*",
-		component: ErrorPage
-	}
+  {
+    path: "/home",
+    component: HomePage,
+  },
+  {
+    path: "/",
+    component: LayOut,
+    redirect: "/dashboard",
+    children: [
+      {
+        path: "dashboard",
+        component: Dashboard,
+      },
+      {
+        path: "teams",
+        component: TeamPage,
+      },
+      {
+        path: "players",
+        component: PlayerPage,
+      },
+      {
+        path: "players/:id",
+        component: PlayerDetailPage,
+      },
+      {
+        path: "analysis",
+        component: AnalysisPage,
+      },
+    ],
+  },
+  {
+    path: "/players/dashboard",
+    redirect: "/dashboard",
+  },
+  {
+    path: "/players/players",
+    redirect: "/players",
+  },
+  {
+    path: "/players/analysis",
+    redirect: "/analysis",
+  },
+  {
+    path: "/players/teams",
+    redirect: "/teams",
+  },
+  {
+    path: "/auth",
+    children: [
+      {
+        path: "login",
+        component: LoginPage,
+      },
+      {
+        path: "register",
+        component: RegisterPage,
+      },
+    ],
+  },
+  {
+    path: "/settings",
+    component: SettingPage,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: ErrorPage,
+  },
 ];
 
 const router = createRouter({
-	history: createWebHashHistory(),
-	routes: constantRoutes
+  history: createWebHashHistory(),
+  routes: constantRoutes,
 });
 
 /*router.beforeEach((to, from, next) => {

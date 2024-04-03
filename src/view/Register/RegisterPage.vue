@@ -1,8 +1,6 @@
 <script setup>
 import $http from "../../utils/http.js";
-import Cookie from 'js-cookie';
 import { useRouter } from "vue-router";
-import { usePlayerStore } from "../../stores/playerStore.js";
 import { passwordRule, emailRule } from "../../utils/valid";
 
 const registerInfo = reactive({
@@ -52,7 +50,6 @@ const registerHandle = (formEl, registerInfo) => {
     formEl.validate((valid) => {
         if (valid) {
             console.log(registerInfo);
-            /**{TODO}*/
             $http.post('/auth/register', registerInfo)
                 .then(_ => {
                     router.push('/auth/login');

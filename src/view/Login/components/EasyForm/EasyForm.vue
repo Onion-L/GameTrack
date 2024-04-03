@@ -1,5 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import { passwordRule } from "../../../../utils/valid";
+
 
 const router = useRouter();
 const props = defineProps(["submitHandle"]);
@@ -8,6 +10,16 @@ const formInfoData = reactive({
   password: '',
 });
 const userStored = ref(false);
+
+const rules = reactive({
+  username: [{ required: true, message: 'Please provide a username', trigger: 'blur' }],
+  password: [
+    { required: true, message: 'Please provide a password', trigger: 'blur' },
+    {
+      validator: passwordRule, trigger: 'blur'
+    }
+  ]
+});
 
 const loginHandle = () => {
   props.submitHandle(formInfoData, userStored.value);
@@ -19,11 +31,11 @@ const registerLink = () => {
 </script>
 
 <template>
-  <el-form :model="formInfoData" style="max-width: 460px" class="easy-form">
-    <el-form-item>
+  <el-form :model="formInfoData" style="max-width: 460px" class="easy-form" :rules="rules">
+    <el-form-item prop="username">
       <el-input v-model="formInfoData.username" placeholder="Username" />
     </el-form-item>
-    <el-form-item>
+    <el-form-item prop="password">
       <el-input type="password" v-model="formInfoData.password" placeholder="Password" />
     </el-form-item>
     <el-form-item>

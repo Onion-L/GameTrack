@@ -11,11 +11,10 @@ const tasks = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       </div>
     </template>
     <el-scrollbar height="40vh">
-      <div class="todo-content" v-for="o in 10" :key="o">
+      <div class="todo-content" v-for="o in 20" :key="o">
         <el-checkbox style="flex:1;" />
         <div style="flex: 6">
           {{ 'List item ' + o }}
-
         </div>
         <div style="flex: 1;">
           <el-icon color="#409EFF" style="margin-right: 10px;">

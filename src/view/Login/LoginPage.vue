@@ -9,9 +9,12 @@ import { usePlayerStore } from "../../stores/playerStore.js";
 const { fetchPlayerData, player_data } = usePlayerStore();
 const router = useRouter();
 const switchTheme = ref(false);
-
+const errorMessage = ref("");
+const isError = ref(false);
 
 const submitHandle = (formData, userStored) => {
+  isError.value = false;
+  errorMessage.value = "";
   $http.post('/auth/login', { ...formData, isRemembered: userStored })
     .then(response => {
       if (localStorage.getItem("gt-user")) {
@@ -20,19 +23,23 @@ const submitHandle = (formData, userStored) => {
       if (response.data.code === 200) {
         router.replace('/dashboard');
         localStorage.setItem('gt-user', response.data.token);
-
       }
     })
     .then(_ => {
       fetchPlayerData();
     })
     .catch(error => {
-      console.error(error.message);
+      isError.value = true;
+      errorMessage.value = error.response.data.message;
+      console.error(error.response.data.message);
     });
 };
 </script>
 
 <template>
+  <div class="alert-container" v-if="isError" style="max-width: 600px">
+    <el-alert :title="errorMessage" type="error" />
+  </div>
   <div class="login-container">
     <div class="login-image"></div>
     <div :class="[switchTheme ? 'login-side-container--dark' : 'login-side-container--light']">
@@ -46,6 +53,7 @@ const submitHandle = (formData, userStored) => {
       </div>
     </div>
   </div>
+
 </template>
 
 
@@ -95,8 +103,14 @@ const submitHandle = (formData, userStored) => {
   src: url('../../assets/fonts/Caveat-Bold.ttf');
 }
 
+.alert-container {
+  position: absolute;
+  width: 30%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+}
+
 .login-container {
-  position: relative;
   display: flex;
   height: 100vh;
   width: 100vw;
