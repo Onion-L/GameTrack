@@ -26,9 +26,6 @@ const { PLAYER_POSITION } = usePlayerStore();
         <PlayerTable />
       </div>
     </div>
-    <div class="row-map">
-      <div class="global-map"></div>
-    </div>
   </div>
 </template>
 
