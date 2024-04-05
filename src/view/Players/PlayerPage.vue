@@ -1,15 +1,12 @@
 <script setup>
-import { usePlayerStore } from "../../stores/playerStore.js";
 import { useRouter } from 'vue-router';
-const { player_data, playerCounts, playersByPosition } = usePlayerStore();
-const router = useRouter();
+import { usePlayerStore } from "../../stores/playerStore.js";
 
+const { playersByPosition } = usePlayerStore();
+const router = useRouter();
 const goToTragetRoute = (id) => {
   router.push(`/players/${id}`);
 }
-console.log('!!', player_data);
-
-console.log(playerCounts);
 </script>
 
 <template>

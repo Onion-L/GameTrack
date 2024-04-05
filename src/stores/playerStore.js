@@ -7,6 +7,23 @@ export const usePlayerStore = defineStore("player", {
       PLAYER_POSITION: ["GOALKEEPERS", "DEFENDERS", "MIDFIELDERS", "FORWARDS"],
       PLAYER_POSITION_SHORT: ["GK", "DEF", "MD", "FW"],
       player_data: [],
+      analysis_key: [
+        { name: "appearance", label: "Appearance" },
+        { name: "minutes", label: "Minutes" },
+        { name: "save", label: "Save" },
+        { name: "goal", label: "Goal" },
+        { name: "assist", label: "Assist" },
+        { name: "yellowCard", label: "Yellow Card" },
+        { name: "redCard", label: "Red Card" },
+        { name: "keyPasses", label: "Key Passes" },
+        { name: "passSuccessRate", label: "Pass Success Rate" },
+        { name: "playerRating", label: "Player Rating" },
+        { name: "tacklesWon", label: "Tackles Won" },
+        { name: "interception", label: "Interception" },
+        { name: "clearance", label: "Clearance" },
+        { name: "dribbleSuccessRate", label: "Dribble Success Rate" },
+        { name: "distanceCovered", label: "Distance Covered" },
+      ],
     };
   },
   getters: {

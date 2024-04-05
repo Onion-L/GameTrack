@@ -1,15 +1,16 @@
 <script setup>
-import { useAppStore } from '../../stores/appStore';
 import { storeToRefs } from "pinia";
-import { usePlayerStore } from "../../stores/playerStore.js";
+import { useRoute } from 'vue-router';
 import GaugeChart from './components/gaugeChart.vue';
 import RadarChart from './components/RadarChart.vue';
-import { useRoute } from 'vue-router';
+import { useAppStore } from '../../stores/appStore';
+import { usePlayerStore } from "../../stores/playerStore.js";
 
 const { player_data } = usePlayerStore();
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
 const route = useRoute();
+const value1 = ref(3)
 const { id } = route.params;
 const { stats } = player_data[id];
 
@@ -27,6 +28,7 @@ onMounted(() => {
                     <span>{{ player_data[id].number }}</span>
                 </div>
                 <span>{{ player_data[id].position }}</span>
+                <el-rate v-model="value1" disabled />
                 <div class="player-detail-name">{{ player_data[id].name }}</div>
                 <div class="detail-stats">
                     <ul>

@@ -1,11 +1,19 @@
 <script setup>
 import $http from "../../utils/http.js";
 import MatchStatistics from './components/MatchStatistics.vue';
+import { Delete, Edit, DocumentAdd, Share, Upload } from '@element-plus/icons-vue';
 
+const loading = ref(false);
 const matchResult = ref([]);
 const dialogVisible = ref(false);
+const dialogFormVisible = ref(false);
 const statsResult = ref({});
 const statsKey = ref([]);
+const uploadRef = ref();
+
+const formLabelWidth = '60px';
+const formData = new FormData();
+
 const statsValue = reactive({
     totalGoals: 0,
     totalWinNum: 0,
@@ -14,6 +22,12 @@ const statsValue = reactive({
     averagePassAccuracy: 0,
     totalYellowCards: 0,
     totalRedCards: 0,
+})
+
+const matchForm = reactive({
+    home: '',
+    away: '',
+    date: ''
 })
 
 onMounted(() => {
@@ -40,33 +54,75 @@ const handleRowClick = (row) => {
     statsKey.value = Object.keys(row.stats);
     dialogVisible.value = true;
     statsResult.value = row.stats;
+};
+
+const handleFileChange = (file) => {
+    if (!file) return;
+    formData.append('match', file.raw, file.raw.name);
+    for (let [key, value] of formData.entries()) {
+        console.log(123, key, value);
+    }
 }
+
+const handleSubmit = () => {
+    console.log(matchForm);
+    Object.keys(matchForm).forEach(key => {
+        formData.append(key, matchForm[key]);
+    });
+    $http.post('/api/upload', formData).then(response => {
+        console.log(response.data);
+        window.location.reload();
+    }).catch(error => {
+        console.error(error);
+    })
+    dialogFormVisible.value = false;
+};
 </script>
 
 <template>
     <div class="team-card">
-
         <div class="stats-container">
             <MatchStatistics :statsValue="statsValue" />
         </div>
+        <div style="width: 96%; ">
+            <el-button type="primary" :icon="DocumentAdd" @click="dialogFormVisible = true">New Data</el-button>
+        </div>
 
-        <el-dialog v-model="dialogVisible" title="Tips" width="500">
-            <div class="detail-text" v-for="key in statsKey">
-                <span>{{ key }}</span>
-                :
-                <span>
-                    {{ statsResult[key] }}
-                </span>
-            </div>
+        <el-dialog v-model="dialogFormVisible" title="Match Data" width="700">
+            <el-form :model="matchForm">
+                <el-form-item label="Date" :label-width="formLabelWidth">
+                    <el-date-picker v-model="matchForm.date" type="date" format="YYYY-MM-DD" value-format="YYYY-MM-DD"
+                        placeholder="Pick a day" />
+                </el-form-item>
+                <el-form-item label="Match" :label-width="formLabelWidth">
+                    <el-input placeholder="Home" v-model="matchForm.home" autocomplete="off"
+                        style="width: 180px;height: 32px;" />
+                    vs
+                    <el-input placeholder="Away" v-model="matchForm.away" autocomplete="off"
+                        style="width: 180px;height: 32px;" />
+                </el-form-item>
+                <el-form-item>
+                    <el-upload ref="uploadRef" class="upload-demo" drag :on-change="handleFileChange"
+                        accept=".xlsx, .xls" :auto-upload="false">
+                        <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+                        <div class="el-upload__text">
+                            Drop file here or <em>click to upload</em>
+                        </div>
+                    </el-upload>
+                </el-form-item>
+            </el-form>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button type="primary" @click="dialogVisible = false">Cancel</el-button>
+                    <el-button @click="dialogFormVisible = false">Cancel</el-button>
+                    <el-button type="primary" @click="handleSubmit">
+                        Confirm
+                    </el-button>
                 </div>
             </template>
         </el-dialog>
 
         <div class="match-container">
-            <el-scrollbar height="80vh">
+            <el-scrollbar height="80vh" v-loading="loading">
                 <el-table :data="matchResult" height="80vh" stripe style="width: 100%" @row-click="handleRowClick">
                     <el-table-column prop="date" label="Date" width="180" sortable />
                     <el-table-column prop="name.home" label="Home" width="240" sortable />
@@ -85,6 +141,21 @@ const handleRowClick = (row) => {
                 </el-table>
             </el-scrollbar>
         </div>
+
+        <el-dialog v-model="dialogVisible" title="Tips" width="500">
+            <div class="detail-text" v-for="key in statsKey">
+                <span>{{ key }}</span>
+                :
+                <span>
+                    {{ statsResult[key] }}
+                </span>
+            </div>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button type="primary" @click="dialogVisible = false">Cancel</el-button>
+                </div>
+            </template>
+        </el-dialog>
     </div>
 </template>
 
@@ -107,6 +178,11 @@ const handleRowClick = (row) => {
         padding: 0 10px;
         margin: 20px 0;
     }
+}
+
+.upload-demo {
+    width: 100%;
+    margin-top: 10px;
 }
 
 .detail-text {

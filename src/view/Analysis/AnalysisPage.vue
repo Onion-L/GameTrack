@@ -1,11 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 import { usePlayerStore } from "../../stores/playerStore.js";
-const { player_data } = usePlayerStore();
+const { player_data, analysis_key } = usePlayerStore();
 
 const player1 = ref('');
 const player2 = ref('');
+const startAnalyse = ref(false);
+const customColor = ref('#bccce0');
 
+const handleAnalyseClick = () => {
+  console.log(player1.value, 'vs', player2.value);
+
+  setTimeout(() => {
+    startAnalyse.value = true;
+  }, 1000);
+};
 </script>
 
 <template>
@@ -31,32 +40,28 @@ const player2 = ref('');
         ">{{ player.position }}</span>
       </el-option>
     </el-select>
-    <el-button type="primary" style="height: 100%; margin-left: 10px;">Start</el-button>
+    <el-button @click="handleAnalyseClick" type="primary" style="height: 100%; margin-left: 10px;">Start</el-button>
   </div>
-  <div class="analysis-container">
+  <div class="analysis-container" v-if="startAnalyse">
     <div class="left-wrap">
       <img src="https://assets.manutd.com/AssetPicker/images/0/0/18/253/1244668/22-Tom-Heaton1693930126989.png" alt="">
     </div>
     <div class="analysis-wrap">
-      <div class="left-data"></div>
-      <ul class="data-list">
-        <li>Appearance</li>
-        <li>Minutes</li>
-        <li>Save</li>
-        <li v-if="false">Goal</li>
-        <li>Assist</li>
-        <li>Yellow Card</li>
-        <li>Red Card</li>
-        <li>Key Passes</li>
-        <li>Pass Success Rate</li>
-        <li>Player Rating</li>
-        <li>Tackles Won</li>
-        <li>Interception</li>
-        <li>Clearance</li>
-        <li>Dribble Success Rate</li>
-        <li>Distance Covered</li>
-      </ul>
-      <div class="right-data"></div>
+      <div class="analysis-content" v-for="key in analysis_key" :key="key.name">
+        <div class="progress-container">
+          <el-progress :percentage="50" style="transform:rotate(180deg); height: 7%;" show-text="false">
+            <span></span>
+          </el-progress>
+        </div>
+        <div class="data-wrap">
+          <span>{{ key.label }}</span>
+        </div>
+        <div class="progress-container">
+          <el-progress :percentage="50" show-text="false" :color="customColor">
+            <span></span>
+          </el-progress>
+        </div>
+      </div>
     </div>
     <div class="right-wrap">
       <img src="https://assets.manutd.com/AssetPicker/images/0/0/18/253/1244669/24-Andre-Onana1693833901146.png" alt="">
@@ -74,7 +79,7 @@ const player2 = ref('');
 }
 
 .analysis-container {
-  height: 75vh;
+  height: 78vh;
   margin-top: 5vh;
   display: flex;
 
@@ -84,31 +89,28 @@ const player2 = ref('');
   }
 
   .analysis-wrap {
-    height: 100%;
     flex: 2;
     display: flex;
+    flex-direction: column;
 
-    .left-data {
-      height: 100%;
-      flex: 1;
-    }
+    .analysis-content {
+      width: 100%;
+      height: 7%;
+      display: flex;
 
-    .data-list {
-      height: 100%;
-      list-style: none;
-      width: 50%;
-      margin-top: 2%;
+      .progress-container {
+        flex: 1;
+        padding-top: 10px;
+      }
 
-      li {
+      .data-wrap {
+        flex: 1;
         text-align: center;
-        height: 7%;
+        font-size: 18px;
       }
     }
 
-    .right-data {
-      height: 100%;
-      flex: 1;
-    }
+
   }
 
   .right-wrap {
