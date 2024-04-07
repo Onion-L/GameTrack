@@ -23,6 +23,7 @@ const submitHandle = (formData, userStored) => {
       if (response.data.code === 200) {
         router.replace('/dashboard');
         localStorage.setItem('gt-user', response.data.token);
+        localStorage.setItem('gt-username', response.data.username);
       }
     })
     .then(_ => {

@@ -8,7 +8,6 @@ const loading = ref(false);
 const matchResult = ref([]);
 const dialogFormVisible = ref(false);
 const uploadRef = ref();
-const result = ref('win');
 const formLabelWidth = '60px';
 const formData = new FormData();
 
@@ -20,7 +19,7 @@ const statsValue = reactive({
     averagePassAccuracy: 0,
     totalYellowCards: 0,
     totalRedCards: 0,
-})
+});
 
 const matchForm = reactive({
     home: '',
@@ -28,7 +27,7 @@ const matchForm = reactive({
     date: '',
     result: '',
     possession: 0
-})
+});
 
 onMounted(() => {
     $http.get('/api/matches', {
@@ -53,7 +52,7 @@ onMounted(() => {
 const handleFileChange = (file) => {
     if (!file) return;
     formData.append('match', file.raw, file.raw.name);
-}
+};
 
 const handleSubmit = () => {
     Object.keys(matchForm).forEach(key => {
@@ -61,15 +60,20 @@ const handleSubmit = () => {
     });
     $http.post('/api/upload', formData).then(response => {
         console.log(response.data);
+        ElMessage({
+            message: 'Congrats, this is a success message.',
+            type: 'success',
+        });
+    }).then(_ => {
         window.location.reload();
     }).catch(error => {
+        ElMessage({
+            message: error.response.message,
+            type: 'error',
+        });
         console.error(error);
     })
     dialogFormVisible.value = false;
-};
-
-const handleChange = () => {
-    console.log(matchForm.result);
 };
 </script>
 
@@ -98,14 +102,15 @@ const handleChange = () => {
                 </el-form-item>
 
                 <el-form-item label="Result" :label-width="formLabelWidth">
-                    <el-radio-group v-model="matchForm.result" @change="handleChange">
+                    <el-radio-group v-model="matchForm.result">
                         <el-radio label="win">Win</el-radio>
                         <el-radio label="draw">Draw</el-radio>
                         <el-radio label="lost">Lose</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="Posession" :label-width="formLabelWidth">
-                    <el-input v-model="matchForm.possession" autocomplete="off" style="width: 180px;height: 32px;">
+                    <el-input v-model="matchForm.possession" type="number" autocomplete="off" max="100" min="0"
+                        style="width: 180px;height: 32px;">
                         <template #append>%</template>
                     </el-input>
                 </el-form-item>
@@ -128,7 +133,7 @@ const handleChange = () => {
                 </div>
             </template>
         </el-dialog>
-        <MatchTable :loading="loading" :matchResult="matchResult" handleRowClick="handleRowClick" />
+        <MatchTable :loading="loading" :matchResult="matchResult" />
 
 
     </div>

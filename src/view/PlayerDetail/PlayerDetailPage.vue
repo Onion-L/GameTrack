@@ -21,40 +21,33 @@ onMounted(() => {
 
 </script>
 <template>
-    <div>
-        <div class="player-detail_header">
-            <div class="player-detail-content">
-                <div class="player-shirt-number">
-                    <span>{{ player_data[id].number }}</span>
-                </div>
-                <span>{{ player_data[id].position }}</span>
-                <el-rate v-model="value1" disabled />
-                <div class="player-detail-name">{{ player_data[id].name }}</div>
-                <div class="detail-stats">
-                    <ul>
-                        <li>
-                            <div class="stats-text">AGE</div>
-                            <div class="stats-number">{{ stats.age }}</div>
-                        </li>
-                        <li>
-                            <div class="stats-text">APPERANCE</div>
-                            <div class="stats-number">{{ stats.appearance }}</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="match-stats">
-                    <h1 class="stats-header">MATCH</h1>
-                    <hr />
-                    <div>hello world</div>
-                </div>
+    <div class="player-detail_header">
+        <div class="player-detail-content">
+            <div class="player-shirt-number">
+                <span>{{ player_data[id].number }}</span>
             </div>
-            <div class="player-profile">
-                <img :src='player_data[id].detail_image' alt="player" />
+            <span>{{ player_data[id].position }}</span>
+            <el-rate v-model="value1" disabled />
+            <div class="player-detail-name">{{ player_data[id].name }}</div>
+            <div class="detail-stats">
+                <ul>
+                    <li>
+                        <div class="stats-text">AGE</div>
+                        <div class="stats-number">{{ stats.age }}</div>
+                    </li>
+                    <li>
+                        <div class="stats-text">APPERANCE</div>
+                        <div class="stats-number">{{ stats.appearance }}</div>
+                    </li>
+                </ul>
             </div>
-            <div class="chart-group">
-                <GaugeChart />
-                <RadarChart />
-            </div>
+        </div>
+        <div class="player-profile">
+            <img :src='player_data[id].detail_image' alt="player" />
+        </div>
+        <div class="chart-group">
+            <GaugeChart />
+            <RadarChart />
         </div>
     </div>
 </template>

@@ -1,28 +1,110 @@
 <script setup>
-import { CloseBold, Edit } from "@element-plus/icons-vue";
+import { CloseBold, Edit, Plus } from "@element-plus/icons-vue";
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { storeToRefs } from "pinia";
+import $http from '../../utils/http';
+import { useDataStore } from "../../stores/dataStore.js";
 
-const tasks = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+const dialogFormVisible = ref(false);
+const dataStore = useDataStore();
+const { taskList } = storeToRefs(dataStore);
+const taskForm = reactive({
+  user: '',
+  description: '',
+  isCompleted: false,
+});
+
+onMounted(() => {
+  dataStore.fetchTasksData();
+})
+
+const addTask = () => {
+  taskForm.user = localStorage.getItem('gt-username');
+  console.log(taskForm);
+  dialogFormVisible.value = false;
+  $http.post('api/tasks', taskForm).then(response => {
+    ElMessage({
+      message: response.data.message,
+      type: 'success',
+    })
+  }).then(_ => {
+    window.location.reload();
+  }).catch(error => {
+    console.error(error);
+    ElMessage({
+      message: error,
+      type: 'error',
+    })
+  })
+};
+
+const handleChecked = (task) => {
+  console.log(task);
+  $http.put('/api/tasks', task).then(response => {
+    ElMessage({
+      message: response.data.message,
+      type: 'success',
+    });
+  })
+}
+
+const deleteTask = (t) => {
+  console.log(123);
+  ElMessageBox.confirm(
+    'The data will be permanently deleted. Continue?',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+    }
+  ).then(_ => {
+    console.log(t._id);
+    $http.delete(`/api/tasks?id=${t._id}`).then(response => {
+      ElMessage({
+        message: response.data.message,
+        type: 'success',
+      });
+    }).then(_ => {
+      dataStore.taskListDelete(t._id);
+    })
+  })
+};
 </script>
+
 <template>
   <el-card class="box-card">
+    <el-dialog v-model="dialogFormVisible" title="Task" width="500">
+      <el-form :model="taskForm">
+        <el-form-item label="Content" :label-width="formLabelWidth">
+          <el-input type="textarea" v-model="taskForm.description" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" @click="addTask">
+            Confirm
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
     <template #header>
       <div class="card-header">
-        <span>Tasks({{ tasks.length }})</span>
+        <span>Tasks({{ taskList.length }})</span>
+        <div class="flex-grow"></div>
+        <el-button type="primary" :icon="Plus" @click="dialogFormVisible = true">Add</el-button>
       </div>
     </template>
     <el-scrollbar height="40vh">
-      <div class="todo-content" v-for="o in 20" :key="o">
-        <el-checkbox style="flex:1;" />
-        <div style="flex: 6">
-          {{ 'List item ' + o }}
+      <div class="todo-content" v-for="t in taskList" :key="t._id">
+        <el-checkbox style="flex:1;" v-model="t.isCompleted" @change="handleChecked(t)" />
+        <div style="flex: 6;">
+          <el-text :tag="t.isCompleted ? 'del' : 'bold'">
+            {{ t.description }}
+          </el-text>
         </div>
         <div style="flex: 1;">
-          <el-icon color="#409EFF" style="margin-right: 10px;">
-            <Edit />
-          </el-icon>
-          <el-icon color="#F56C6C">
-            <CloseBold />
-          </el-icon>
+          <el-button type="danger" link @click="deleteTask(t)">Delete</el-button>
         </div>
       </div>
     </el-scrollbar>

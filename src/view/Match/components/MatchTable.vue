@@ -1,4 +1,7 @@
 <script setup>
+import $http from "../../../utils/http.js";
+import { ElMessage, ElMessageBox } from 'element-plus';
+
 const props = defineProps({
     loading: Boolean,
     matchResult: Array,
@@ -8,17 +11,47 @@ const dialogVisible = ref(false);
 const statsResult = ref({});
 const statsKey = ref([]);
 
-const handleRowClick = (row) => {
+const checkDetail = (row) => {
+    console.log(row);
     statsKey.value = Object.keys(row.stats);
     dialogVisible.value = true;
     statsResult.value = row.stats;
+};
+
+const handleDelete = (row) => {
+    console.log(row.date);
+    ElMessageBox.confirm(
+        'The data will be permanently deleted. Continue?',
+        'Warning',
+        {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning',
+        }
+    ).then(() => {
+        $http.delete(`/api/match?date=${row.date}`).then(response => {
+            ElMessage({
+                message: response.data.message,
+                type: 'success',
+            });
+        }).then(_ => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }).catch(error => {
+            ElMessage({
+                message: error.response,
+                type: 'error',
+            });
+        })
+    })
 };
 </script>
 
 <template>
     <div class="match-container">
         <el-scrollbar height="80vh" v-loading="loading">
-            <el-table :data="matchResult" height="80vh" stripe style="width: 100%" @row-click="handleRowClick">
+            <el-table :data="matchResult" height="80vh" stripe style="width: 100%">
                 <el-table-column prop="date" label="Date" width="180" sortable />
                 <el-table-column prop="name.home" label="Home" width="240" sortable />
                 <el-table-column prop="name.away" label="Away" width="240" sortable />
@@ -31,6 +64,12 @@ const handleRowClick = (row) => {
                             }}</el-tag>
 
                         <el-tag v-else type="danger">{{ scope.row.result }}</el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column label="Operation" width="180">
+                    <template #default="scope">
+                        <el-button link type="primary" size="small" @click="checkDetail(scope.row)">Detail</el-button>
+                        <el-button link type="danger" size="small" @click="handleDelete(scope.row)">Delete</el-button>
                     </template>
                 </el-table-column>
             </el-table>
