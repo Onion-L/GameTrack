@@ -1,16 +1,14 @@
 <script setup>
 import $http from "../../utils/http.js";
 import MatchStatistics from './components/MatchStatistics.vue';
-import { Delete, Edit, DocumentAdd, Share, Upload } from '@element-plus/icons-vue';
+import MatchTable from './components/MatchTable.vue';
+import { DocumentAdd } from '@element-plus/icons-vue';
 
 const loading = ref(false);
 const matchResult = ref([]);
-const dialogVisible = ref(false);
 const dialogFormVisible = ref(false);
-const statsResult = ref({});
-const statsKey = ref([]);
 const uploadRef = ref();
-
+const result = ref('win');
 const formLabelWidth = '60px';
 const formData = new FormData();
 
@@ -27,7 +25,9 @@ const statsValue = reactive({
 const matchForm = reactive({
     home: '',
     away: '',
-    date: ''
+    date: '',
+    result: '',
+    possession: 0
 })
 
 onMounted(() => {
@@ -50,22 +50,12 @@ onMounted(() => {
     })
 });
 
-const handleRowClick = (row) => {
-    statsKey.value = Object.keys(row.stats);
-    dialogVisible.value = true;
-    statsResult.value = row.stats;
-};
-
 const handleFileChange = (file) => {
     if (!file) return;
     formData.append('match', file.raw, file.raw.name);
-    for (let [key, value] of formData.entries()) {
-        console.log(123, key, value);
-    }
 }
 
 const handleSubmit = () => {
-    console.log(matchForm);
     Object.keys(matchForm).forEach(key => {
         formData.append(key, matchForm[key]);
     });
@@ -76,6 +66,10 @@ const handleSubmit = () => {
         console.error(error);
     })
     dialogFormVisible.value = false;
+};
+
+const handleChange = () => {
+    console.log(matchForm.result);
 };
 </script>
 
@@ -94,12 +88,26 @@ const handleSubmit = () => {
                     <el-date-picker v-model="matchForm.date" type="date" format="YYYY-MM-DD" value-format="YYYY-MM-DD"
                         placeholder="Pick a day" />
                 </el-form-item>
+
                 <el-form-item label="Match" :label-width="formLabelWidth">
                     <el-input placeholder="Home" v-model="matchForm.home" autocomplete="off"
                         style="width: 180px;height: 32px;" />
                     vs
                     <el-input placeholder="Away" v-model="matchForm.away" autocomplete="off"
                         style="width: 180px;height: 32px;" />
+                </el-form-item>
+
+                <el-form-item label="Result" :label-width="formLabelWidth">
+                    <el-radio-group v-model="matchForm.result" @change="handleChange">
+                        <el-radio label="win">Win</el-radio>
+                        <el-radio label="draw">Draw</el-radio>
+                        <el-radio label="lost">Lose</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="Posession" :label-width="formLabelWidth">
+                    <el-input v-model="matchForm.possession" autocomplete="off" style="width: 180px;height: 32px;">
+                        <template #append>%</template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-upload ref="uploadRef" class="upload-demo" drag :on-change="handleFileChange"
@@ -120,42 +128,9 @@ const handleSubmit = () => {
                 </div>
             </template>
         </el-dialog>
+        <MatchTable :loading="loading" :matchResult="matchResult" handleRowClick="handleRowClick" />
 
-        <div class="match-container">
-            <el-scrollbar height="80vh" v-loading="loading">
-                <el-table :data="matchResult" height="80vh" stripe style="width: 100%" @row-click="handleRowClick">
-                    <el-table-column prop="date" label="Date" width="180" sortable />
-                    <el-table-column prop="name.home" label="Home" width="240" sortable />
-                    <el-table-column prop="name.away" label="Away" width="240" sortable />
-                    <el-table-column prop="stats.goals" label="Goal" width="240" sortable />
-                    <el-table-column label="Result">
-                        <template #default="scope">
-                            <el-tag v-if="scope.row.result === 'win'" type="success">{{
-                scope.row.result }}</el-tag>
-                            <el-tag v-else-if="scope.row.result === 'draw'" type="warning">{{ scope.row.result
-                                }}</el-tag>
 
-                            <el-tag v-else type="danger">{{ scope.row.result }}</el-tag>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </el-scrollbar>
-        </div>
-
-        <el-dialog v-model="dialogVisible" title="Tips" width="500">
-            <div class="detail-text" v-for="key in statsKey">
-                <span>{{ key }}</span>
-                :
-                <span>
-                    {{ statsResult[key] }}
-                </span>
-            </div>
-            <template #footer>
-                <div class="dialog-footer">
-                    <el-button type="primary" @click="dialogVisible = false">Cancel</el-button>
-                </div>
-            </template>
-        </el-dialog>
     </div>
 </template>
 
@@ -195,12 +170,5 @@ const handleSubmit = () => {
     width: 100%;
     height: 10vh;
     margin-top: 20px;
-}
-
-.match-container {
-    width: 96%;
-    border-radius: 2px;
-    background-color: #fff;
-    box-shadow: $gt-container-box-shadow;
 }
 </style>
