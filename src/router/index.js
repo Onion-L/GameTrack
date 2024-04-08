@@ -68,10 +68,12 @@ const constantRoutes = [
     path: "/auth",
     children: [
       {
+        name: "Login",
         path: "login",
         component: LoginPage,
       },
       {
+        name: "Register",
         path: "register",
         component: RegisterPage,
       },
@@ -92,13 +94,15 @@ const router = createRouter({
   routes: constantRoutes,
 });
 
-/*router.beforeEach((to, from, next) => {
-    const authStore = authStoreHook();
-    if(to.name !== 'Login') {
-        next({path: '/login'})
-    }else {
-        next();
-    }
-})*/
+router.beforeEach((to, from, next) => {
+  if (
+    !(to.name === "Register" || to.name === "Login") &&
+    !localStorage.getItem("gt-user")
+  ) {
+    next({ path: "/auth/login" });
+  } else {
+    next();
+  }
+});
 
 export default router;

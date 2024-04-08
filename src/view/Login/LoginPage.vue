@@ -2,15 +2,21 @@
 import EasyForm from "./components/EasyForm/EasyForm.vue";
 import { Moon, Sunny } from "@element-plus/icons-vue";
 import $http from "../../utils/http.js";
-import Cookie from 'js-cookie';
 import { useRouter } from "vue-router";
 import { usePlayerStore } from "../../stores/playerStore.js";
+import { useMatchStore } from "../../stores/matchStore.js";
 
-const { fetchPlayerData, player_data } = usePlayerStore();
+
+const { fetchPlayerData } = usePlayerStore();
+const { fetchMatchData } = useMatchStore();
 const router = useRouter();
 const switchTheme = ref(false);
 const errorMessage = ref("");
 const isError = ref(false);
+
+onMounted(() => {
+  localStorage.clear();
+});
 
 const submitHandle = (formData, userStored) => {
   isError.value = false;
@@ -28,6 +34,7 @@ const submitHandle = (formData, userStored) => {
     })
     .then(_ => {
       fetchPlayerData();
+      fetchMatchData();
     })
     .catch(error => {
       isError.value = true;

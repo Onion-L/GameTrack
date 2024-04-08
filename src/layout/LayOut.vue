@@ -4,14 +4,11 @@ import SideBar from "./components/SideBar/SideBar.vue";
 import AppMain from "./components/AppMain/AppMain.vue";
 import { useAppStore } from "../stores/appStore.js";
 import { storeToRefs } from "pinia";
-import Cookie from "js-cookie";
 
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
 
-onMounted(() => {
-  console.log(Cookie.get('username'))
-});
+
 </script>
 
 <template>

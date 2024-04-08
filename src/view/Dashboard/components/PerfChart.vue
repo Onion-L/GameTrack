@@ -1,9 +1,12 @@
 <script setup>
-import * as echarts from 'echarts';
 import { ref, onMounted, nextTick } from 'vue';
-import { useAppStore } from "../../../stores/appStore.js";
+import * as echarts from 'echarts';
 import { storeToRefs } from 'pinia';
+import { useAppStore } from "../../../stores/appStore.js";
 
+const props = defineProps({
+    monthlyRate: Array,
+});
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
 
@@ -24,14 +27,13 @@ const initChart = (chart) => {
     let option = {
         xAxis: {
             type: 'category',
-            data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            data: ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"],
             spitline: {
                 show: true
             }
         },
         yAxis: {
             type: 'value',
-            min: 50,
             spitline: {
                 show: false
             }
@@ -53,7 +55,7 @@ const initChart = (chart) => {
         },
         series: [
             {
-                data: [100, 70, 85, 90, 65, 75, 80, 70, 62, 73, 84, 65],
+                data: props.monthlyRate,
                 type: 'line',
                 smooth: true
             }

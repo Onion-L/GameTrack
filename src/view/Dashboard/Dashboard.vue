@@ -5,14 +5,20 @@ import PerfChart from './components/PerfChart.vue';
 import TeamInfoCharts from './components/TeamInfoCharts.vue';
 import PlayerTable from './components/PlayerTable.vue';
 import { usePlayerStore } from "../../stores/playerStore.js";
+import { useMatchStore } from "../../stores/matchStore.js";
 
 const { PLAYER_POSITION } = usePlayerStore();
+const { fetchMatchData, winRateByMonth } = useMatchStore();
+
+onMounted(() => {
+  fetchMatchData();
+});
 </script>
 
 <template>
   <div class="dashboard">
     <div class="row-line">
-      <PerfChart />
+      <PerfChart :monthlyRate="winRateByMonth" />
     </div>
     <div class="club-info-row">
       <ClubCard v-for="(position, index) in PLAYER_POSITION" :Position="position" :index="index" />
