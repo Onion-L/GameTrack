@@ -8,23 +8,24 @@ import { usePlayerStore } from "../../stores/playerStore.js";
 import { useMatchStore } from "../../stores/matchStore.js";
 
 const { PLAYER_POSITION } = usePlayerStore();
-const { fetchMatchData, winRateByMonth } = useMatchStore();
+const { fetchMatchData, winRateByMonth, totalGoalByMonth, seasonDate } = useMatchStore();
 
 onMounted(() => {
   fetchMatchData();
+  console.log(totalGoalByMonth);
 });
 </script>
 
 <template>
   <div class="dashboard">
     <div class="row-line">
-      <PerfChart :monthlyRate="winRateByMonth" />
+      <PerfChart :monthlyRate="winRateByMonth" :seasonDate="seasonDate" />
     </div>
     <div class="club-info-row">
       <ClubCard v-for="(position, index) in PLAYER_POSITION" :Position="position" :index="index" />
     </div>
     <div class="match-info">
-      <TeamInfoCharts />
+      <TeamInfoCharts :monthlyGoals="totalGoalByMonth" :seasonDate="seasonDate" />
     </div>
     <div class="row-task">
       <TodoList class="todo-list" />

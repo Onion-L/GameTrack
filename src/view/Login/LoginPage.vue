@@ -33,8 +33,8 @@ const submitHandle = (formData, userStored) => {
       }
     })
     .then(_ => {
-      fetchPlayerData();
       fetchMatchData();
+      fetchPlayerData();
     })
     .catch(error => {
       isError.value = true;

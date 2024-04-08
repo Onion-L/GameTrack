@@ -7,7 +7,6 @@ import MatchPage from "../view/Match/MatchPage.vue";
 import PlayerPage from "../view/Players/PlayerPage.vue";
 import PlayerDetailPage from "../view/PlayerDetail/PlayerDetailPage.vue";
 import AnalysisPage from "../view/Analysis/AnalysisPage.vue";
-import SettingPage from "../view/Settings/SettingPage.vue";
 import ErrorPage from "../page/Error/ErrorPage.vue";
 import RegisterPage from "../view/Register/RegisterPage.vue";
 import TeamPage from "../view/Team/TeamPage.vue";
@@ -78,10 +77,6 @@ const constantRoutes = [
         component: RegisterPage,
       },
     ],
-  },
-  {
-    path: "/settings",
-    component: SettingPage,
   },
   {
     path: "/:pathMatch(.*)*",

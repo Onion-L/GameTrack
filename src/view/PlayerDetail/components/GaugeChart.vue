@@ -82,7 +82,7 @@ const option = {
             },
             data: [
                 {
-                    value: 0.5,
+                    value: 0.76,
                     name: 'Grade Rating'
                 }
             ]

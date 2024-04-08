@@ -4,6 +4,18 @@ import $http from "../utils/http";
 export const useMatchStore = defineStore("match", {
   state: () => ({
     matchData: [],
+    seasonDate: [
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+    ],
   }),
   getters: {
     winRateByMonth: (state) => {
@@ -31,6 +43,30 @@ export const useMatchStore = defineStore("match", {
       });
       return monthlyRate;
     },
+
+    totalGoalByMonth: (state) => {
+      const goals = [];
+      state.matchData.forEach((match) => {
+        goals.push({ date: match.date, goals: match.stats.goals });
+      });
+      const monthlyStats = {};
+      goals.forEach((match) => {
+        const [year, month] = match.date.split("-");
+        const monthKey = `${year}-${month}`;
+        if (!monthlyStats[monthKey]) {
+          monthlyStats[monthKey] = { goals: 0 };
+        }
+        monthlyStats[monthKey].goals++;
+      });
+
+      const monthlyGoals = Object.keys(monthlyStats).map((statsKey) => {
+        const { goals } = monthlyStats[statsKey];
+        console.log(goals);
+        return goals;
+      });
+      return monthlyGoals;
+    },
+    playerContribute: (state) => {},
   },
   actions: {
     async fetchMatchData() {

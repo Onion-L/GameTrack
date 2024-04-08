@@ -1,38 +1,8 @@
-<template>
-  <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-    @select="handleSelect" router>
-    <Hamburger :isCollapse="sideStatus" @click="toggleIcon" />
-    <div class="flex-grow"></div>
-    <el-menu-item>
-      <img style="width: 32px;" src="../../../assets/images/github-mark.svg" alt="github" />
-    </el-menu-item>
-    <el-sub-menu>
-      <template #title>
-        <img style="width: 32px;" src="../../../assets/images/user.png" alt="profile" />
-      </template>
-      <el-menu-item>
-        <el-icon>
-          <Setting />
-        </el-icon>
-        Setting
-      </el-menu-item>
-      <el-menu-item @click="handleLogOut">
-        <el-icon>
-          <SwitchButton />
-        </el-icon>
-        Log out
-      </el-menu-item>
-    </el-sub-menu>
-
-  </el-menu>
-</template>
-
-<script lang="js" setup>
+<script setup>
 import Hamburger from "./components/Hamburger.vue";
 import { useAppStore } from '../../../stores/appStore.js'
 import { storeToRefs } from 'pinia';
-import { Setting, SwitchButton } from "@element-plus/icons-vue";
-import { removeCookie } from "../../../utils/cookie.js";
+import { SwitchButton } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 
 const activeIndex2 = ref('1');
@@ -48,14 +18,34 @@ const toggleIcon = () => {
 }
 
 const handleLogOut = () => {
-  // removeCookie('username').then(_ => {
-  //   router.replace('/login');
-  // });
   localStorage.clear();
   router.replace('/auth/login');
 
 };
 </script>
+
+<template>
+  <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" :ellipsis="false"
+    @select="handleSelect" router>
+    <Hamburger :isCollapse="sideStatus" @click="toggleIcon" />
+    <div class="flex-grow"></div>
+    <el-menu-item>
+      <img style="width: 32px;" src="../../../assets/images/github-mark.svg" alt="github" />
+    </el-menu-item>
+    <el-sub-menu>
+      <template #title>
+        <img style="width: 32px;" src="../../../assets/images/user.png" alt="profile" />
+      </template>
+      <el-menu-item @click="handleLogOut">
+        <el-icon>
+          <SwitchButton />
+        </el-icon>
+        Log out
+      </el-menu-item>
+    </el-sub-menu>
+
+  </el-menu>
+</template>
 
 <style lang="scss">
 @import "../../../style/variable.scss";

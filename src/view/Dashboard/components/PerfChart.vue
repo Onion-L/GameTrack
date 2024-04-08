@@ -6,6 +6,7 @@ import { useAppStore } from "../../../stores/appStore.js";
 
 const props = defineProps({
     monthlyRate: Array,
+    seasonDate: Array
 });
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
@@ -27,7 +28,7 @@ const initChart = (chart) => {
     let option = {
         xAxis: {
             type: 'category',
-            data: ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"],
+            data: props.seasonDate,
             spitline: {
                 show: true
             }

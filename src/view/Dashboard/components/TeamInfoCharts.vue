@@ -5,8 +5,12 @@ import { useAppStore } from "../../../stores/appStore.js";
 import { storeToRefs } from 'pinia';
 import { usePlayerStore } from "../../../stores/playerStore.js";
 
-const { PLAYER_POSITION_SHORT } = usePlayerStore();
+const props = defineProps({
+    monthlyGoals: Array,
+    seasonDate: Array
+});
 
+const { PLAYER_POSITION_SHORT } = usePlayerStore();
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
 
@@ -16,7 +20,6 @@ const radarChartContainer = ref();
 
 let lineChart, barChart, radarChart;
 // Mock data for illustration
-const lineSeriesData = [120, 132, 101, 134, 90, 230, 210];
 const barSeriesData = [5, 20, 36, 10, 10, 20];
 const radarSeriesData = [
     { value: [4300, 10000, 28000, 35000, 50000, 19000], name: 'Allocated Budget' },
@@ -34,14 +37,14 @@ const lineChartOption = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
+        data: props.seasonDate
     },
     yAxis: {
         type: 'value'
     },
     series: [
         {
-            data: lineSeriesData,
+            data: props.monthlyGoals,
             type: 'line',
             smooth: true
         }
