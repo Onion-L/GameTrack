@@ -18,7 +18,7 @@ const tableData = player_data;
         <el-table-column prop="position" label="Position" sortable />
         <el-table-column prop="salary_pre" label="Salary(%)" sortable>
             <template #default="scope">
-                <el-progress :text-inside="true" :stroke-width="14" :percentage="scope.row.salary_pre" />
+                <el-progress :stroke-width="14" :percentage="scope.row.salary_pre" />
             </template>
         </el-table-column>
         <el-table-column prop="salary_num" label="Salary(￡)" sortable />

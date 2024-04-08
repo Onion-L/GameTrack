@@ -26,6 +26,7 @@ const { PLAYER_POSITION } = usePlayerStore();
         <PlayerTable />
       </div>
     </div>
+    <div class="dashboard-footer"></div>
   </div>
 </template>
 
@@ -89,5 +90,10 @@ const { PLAYER_POSITION } = usePlayerStore();
     background-color: #fff;
     box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
   }
+}
+
+.dashboard-footer {
+  width: 100%;
+  height: 5vh;
 }
 </style>
