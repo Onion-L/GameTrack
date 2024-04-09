@@ -1,10 +1,7 @@
 <script setup>
-import { storeToRefs } from "pinia";
 import { usePlayerStore } from "../../../stores/playerStore";
 
-const { PLAYER_POSITION, PLAYER_NUMBER, player_data, playerCounts, playersByPosition } = usePlayerStore();
-
-const tableData = player_data;
+const { player_data } = usePlayerStore();
 </script>
 
 <template>

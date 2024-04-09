@@ -1,11 +1,14 @@
 <script setup>
 import { useClubStore } from '../../stores/clubStore';
+import { usePlayerStore } from "../../stores/playerStore.js";
 
+const { player_data, fetchPlayerData } = usePlayerStore();
 const { clubInfo, analysis_key } = useClubStore();
 const infoKeys = Object.keys(clubInfo);
 
-const tableData = [{ date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' }, { date: '123' },];
-
+onMounted(() => {
+    fetchPlayerData();
+});
 </script>
 
 <template>
@@ -21,13 +24,19 @@ const tableData = [{ date: '123' }, { date: '123' }, { date: '123' }, { date: '1
             </div>
         </div>
         <div class="player-table">
-            <el-table :data="tableData" height="100%" style="width: 100%">
-                <el-table-column prop="image" label="#" fixed />
-                <el-table-column prop="name" label="name" fixed />
-                <el-table-column v-for="key in analysis_key" :key="key.name" :prop="key.name" :label="key.label"
-                    width="140" />
+            <el-table :data="player_data" height="100%" style="width: 100%">
+                <el-table-column prop="image" label="#" fixed>
+                    <template #default="scope">
+                        <img :src="scope.row.image" alt="player image" />
+                    </template>
+                </el-table-column>
+                <el-table-column prop="name" label="name" fixed width="140" />
 
-
+                <el-table-column v-for="key in analysis_key" :key="key.name" :label="key.label" width="140">
+                    <template #default="scope">
+                        <span>{{ scope.row.stats[key.name] }}</span>
+                    </template>
+                </el-table-column>
             </el-table>
         </div>
     </div>

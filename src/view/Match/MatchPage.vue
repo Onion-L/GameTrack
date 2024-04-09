@@ -3,9 +3,6 @@ import $http from "../../utils/http.js";
 import MatchStatistics from './components/MatchStatistics.vue';
 import MatchTable from './components/MatchTable.vue';
 import { DocumentAdd } from '@element-plus/icons-vue';
-import { useMatchStore } from "../../stores/matchStore.js";
-
-const { fetchMatchData } = useMatchStore();
 
 const loading = ref(false);
 const matchResult = ref([]);
@@ -67,7 +64,6 @@ const handleSubmit = () => {
             message: 'Congrats, this is a success message.',
             type: 'success',
         });
-        // fetchMatchData();
     }).then(_ => {
         window.location.reload();
     }).catch(error => {
