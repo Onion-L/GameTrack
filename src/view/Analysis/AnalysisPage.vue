@@ -38,6 +38,7 @@ const blueColor = '#3399FF';
 const greyColor = '#CCCCCC';
 
 const determineColor = (player1Stat, player2Stat) => {
+  console.log(player1Stat, player2Stat);
   if (player1Stat > player2Stat) {
     return blueColor;
   } else if (player1Stat < player2Stat) {
@@ -92,7 +93,7 @@ const determineColor = (player1Stat, player2Stat) => {
           </div>
           <div class="progress-container">
             <el-progress :percentage="getNormalizedValue(player2_value, key.name)"
-              :color="determineColor(player1_value.stats[key.name], player2_value.stats[key.name])">
+              :color="determineColor(player2_value.stats[key.name], player1_value.stats[key.name])">
               <span></span>
             </el-progress>
           </div>
