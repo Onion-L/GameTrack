@@ -12,7 +12,6 @@ const { fetchMatchData, winRateByMonth, totalGoalByMonth, seasonDate } = useMatc
 
 onMounted(() => {
   fetchMatchData();
-  console.log(totalGoalByMonth);
 });
 </script>
 

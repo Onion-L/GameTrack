@@ -10,17 +10,17 @@ const props = defineProps({
     seasonDate: Array
 });
 
-const { PLAYER_POSITION_SHORT } = usePlayerStore();
+const { PLAYER_POSITION_SHORT, normalizedRatingsByPosition } = usePlayerStore();
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
-
+const barSeriesDataa = ref([]);
 const lineChartContainer = ref();
 const barChartContainer = ref();
 const radarChartContainer = ref();
 
 let lineChart, barChart, radarChart;
 // Mock data for illustration
-const barSeriesData = [5, 20, 36, 10, 10, 20];
+const barSeriesData = normalizedRatingsByPosition;
 const radarSeriesData = [
     { value: [4300, 10000, 28000, 35000, 50000, 19000], name: 'Allocated Budget' },
     { value: [5000, 14000, 28000, 31000, 42000, 21000], name: 'Actual Spending' }
@@ -119,6 +119,7 @@ onMounted(() => {
 
     radarChart = echarts.init(radarChartContainer.value);
     radarChart.setOption(radarChartOption);
+    console.log(normalizedRatingsByPosition);
 });
 
 watch(sideStatus, () => {
@@ -127,7 +128,7 @@ watch(sideStatus, () => {
         barChart.resize();
         radarChart.resize();
     })
-})
+});
 </script>
 <template>
     <div class="match-info-row">

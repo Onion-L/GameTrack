@@ -56,17 +56,15 @@ export const useMatchStore = defineStore("match", {
         if (!monthlyStats[monthKey]) {
           monthlyStats[monthKey] = { goals: 0 };
         }
-        monthlyStats[monthKey].goals++;
+        monthlyStats[monthKey].goals += match.goals;
       });
 
       const monthlyGoals = Object.keys(monthlyStats).map((statsKey) => {
         const { goals } = monthlyStats[statsKey];
-        console.log(goals);
         return goals;
       });
       return monthlyGoals;
     },
-    playerContribute: (state) => {},
   },
   actions: {
     async fetchMatchData() {
