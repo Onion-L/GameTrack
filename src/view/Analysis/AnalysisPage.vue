@@ -1,19 +1,50 @@
 <script setup>
 import { ref } from 'vue';
 import { usePlayerStore } from "../../stores/playerStore.js";
-const { player_data, analysis_key } = usePlayerStore();
+import { useClubStore } from '../../stores/clubStore';
+import { normalizeValue } from '../../utils/utils';
 
+const { player_data } = usePlayerStore();
+const { analysis_key } = useClubStore();
 const player1 = ref('');
 const player2 = ref('');
+const player1_value = ref({});
+const player2_value = ref({});
 const startAnalyse = ref(false);
 const customColor = ref('#bccce0');
 
 const handleAnalyseClick = () => {
   console.log(player1.value, 'vs', player2.value);
+  player1_value.value = player_data.filter(player => {
+    if (player.name === player1.value) {
+      return player;
+    }
+  })[0];
+  player2_value.value = player_data.filter(player => {
+    if (player.name === player2.value) {
+      return player;
+    }
+  })[0]
+  startAnalyse.value = true;
+};
+const getNormalizedValue = (player, key) => {
+  const values = player_data.map(player => player.stats[key]);
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  return normalizeValue(player.stats[key], minValue, maxValue);
+};
 
-  setTimeout(() => {
-    startAnalyse.value = true;
-  }, 1000);
+const blueColor = '#3399FF';
+const greyColor = '#CCCCCC';
+
+const determineColor = (player1Stat, player2Stat) => {
+  if (player1Stat > player2Stat) {
+    return blueColor;
+  } else if (player1Stat < player2Stat) {
+    return greyColor;
+  } else {
+    return blueColor;
+  }
 };
 </script>
 
@@ -44,27 +75,33 @@ const handleAnalyseClick = () => {
   </div>
   <div class="analysis-container" v-if="startAnalyse">
     <div class="left-wrap">
-      <img src="https://assets.manutd.com/AssetPicker/images/0/0/18/253/1244668/22-Tom-Heaton1693930126989.png" alt="">
+      <img :src="player1_value.detail_image" alt="">
     </div>
     <div class="analysis-wrap">
       <div class="analysis-content" v-for="key in analysis_key" :key="key.name">
-        <div class="progress-container">
-          <el-progress :percentage="50" style="transform:rotate(180deg); height: 7%;" show-text="false">
-            <span></span>
-          </el-progress>
-        </div>
-        <div class="data-wrap">
-          <span>{{ key.label }}</span>
-        </div>
-        <div class="progress-container">
-          <el-progress :percentage="50" show-text="false" :color="customColor">
-            <span></span>
-          </el-progress>
-        </div>
+        <template v-if="player1_value.stats[key.name] !== 0 || player1_value.stats[key.name] !== 0">
+          <div class="progress-container">
+            <el-progress :percentage="getNormalizedValue(player1_value, key.name)"
+              :color="determineColor(player1_value.stats[key.name], player2_value.stats[key.name])"
+              style="transform:rotate(180deg); height: 7%;">
+              <span></span>
+            </el-progress>
+          </div>
+          <div class="data-wrap">
+            <span>{{ key.label }}</span>
+          </div>
+          <div class="progress-container">
+            <el-progress :percentage="getNormalizedValue(player2_value, key.name)"
+              :color="determineColor(player1_value.stats[key.name], player2_value.stats[key.name])">
+              <span></span>
+            </el-progress>
+          </div>
+        </template>
+
       </div>
     </div>
     <div class="right-wrap">
-      <img src="https://assets.manutd.com/AssetPicker/images/0/0/18/253/1244669/24-Andre-Onana1693833901146.png" alt="">
+      <img :src="player2_value.detail_image" alt="">
     </div>
   </div>
 </template>
@@ -95,7 +132,6 @@ const handleAnalyseClick = () => {
 
     .analysis-content {
       width: 100%;
-      height: 7%;
       display: flex;
 
       .progress-container {
