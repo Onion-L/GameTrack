@@ -1,9 +1,5 @@
 export default class ChartOption {
-  constructor(chartData) {
-    this.chartData = chartData;
-  }
-
-  getGaugeOption() {
+  getGaugeOption(chartData) {
     return {
       series: [
         {
@@ -82,8 +78,69 @@ export default class ChartOption {
           },
           data: [
             {
-              value: this.chartData,
+              value: chartData,
               name: "Contribution",
+            },
+          ],
+        },
+      ],
+    };
+  }
+  getRadarOption(indicator, chartData) {
+    return {
+      color: ["#67F9D8", "#FFE434"],
+
+      legend: {},
+      radar: [
+        {
+          indicator: indicator,
+          center: ["50%", "50%"],
+          radius: 120,
+          startAngle: 90,
+          splitNumber: 4,
+          shape: "circle",
+          axisName: {
+            formatter: "【{value}】",
+            color: "#428BD4",
+          },
+          splitArea: {
+            areaStyle: {
+              color: ["#77EADF", "#26C3BE", "#64AFE9", "#428BD4"],
+              shadowColor: "rgba(0, 0, 0, 0.2)",
+              shadowBlur: 10,
+            },
+          },
+          axisLine: {
+            lineStyle: {
+              color: "rgba(211, 253, 250, 0.8)",
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: "rgba(211, 253, 250, 0.8)",
+            },
+          },
+        },
+      ],
+      series: [
+        {
+          type: "radar",
+          emphasis: {
+            lineStyle: {
+              width: 4,
+            },
+          },
+          data: [
+            {
+              value: chartData,
+              name: "Data A",
+            },
+            {
+              value: [6, 5, 3, 10, 15],
+              name: "Data B",
+              areaStyle: {
+                color: "rgba(255, 228, 52, 0.6)",
+              },
             },
           ],
         },

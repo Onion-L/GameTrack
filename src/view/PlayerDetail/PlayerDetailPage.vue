@@ -2,23 +2,33 @@
 import { nextTick } from 'vue';
 import { storeToRefs } from "pinia";
 import { useRoute } from 'vue-router';
-import RadarChart from './components/RadarChart.vue';
 import ChartOption from '../../utils/ChartOption';
 import { useAppStore } from '../../stores/appStore';
 import { usePlayerStore } from "../../stores/playerStore.js";
 import * as echarts from 'echarts';
 
-const gauge = ref();
-let gaugeChart;
-let chartOption;
+const route = useRoute();
+const { id } = route.params;
+
 const { player_data, normalizedRating } = usePlayerStore();
+const { stats } = player_data[id];
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
-const route = useRoute();
-const value1 = ref(3)
-const { id } = route.params;
-const { stats } = player_data[id];
+
+const gauge = ref();
+const radar = ref();
+let radarChart;
+let gaugeChart;
+let chartOption;
+const starValue = ref(3);
 const contributeRating = ref(0);
+const indicatorList = ref([
+    { text: 'Appearance' },
+    { text: 'Appearance' },
+    { text: 'Indicator3' },
+    { text: 'Indicator4' },
+    { text: 'Indicator5' }
+]);
 
 onMounted(() => {
     sideStatus.value = true;
@@ -28,15 +38,16 @@ onMounted(() => {
             contributeRating.value = player.normalizedRating * 0.01;
         }
     });
-    chartOption = new ChartOption(contributeRating.value);
-
-    console.log(contributeRating.value);
+    chartOption = new ChartOption();
 });
 
 nextTick(() => {
-    const gaugeOption = chartOption.getGaugeOption();
+    const gaugeOption = chartOption.getGaugeOption(contributeRating.value);
+    const radarOption = chartOption.getRadarOption(indicatorList.value, [1, 2, 3, 4]);
     gaugeChart = echarts.init(gauge.value);
     gaugeChart.setOption(gaugeOption);
+    radarChart = echarts.init(radar.value);
+    radarChart.setOption(radarOption);
 });
 </script>
 
@@ -47,7 +58,7 @@ nextTick(() => {
                 <span>{{ player_data[id].number }}</span>
             </div>
             <span>{{ player_data[id].position }}</span>
-            <el-rate v-model="value1" disabled />
+            <el-rate v-model="starValue" disabled />
             <div class="player-detail-name">{{ player_data[id].name }}</div>
             <div class="detail-stats">
                 <ul>
@@ -67,8 +78,7 @@ nextTick(() => {
         </div>
         <div class="chart-group">
             <div ref="gauge" class="gauge-chart"></div>
-
-            <RadarChart />
+            <div ref="radar" class="radar-chart-container"></div>
         </div>
     </div>
 </template>
@@ -129,6 +139,11 @@ nextTick(() => {
         .gauge-chart {
             width: 35vw;
             height: 40vh;
+        }
+
+        .radar-chart-container {
+            width: 35vw;
+            height: 50vh;
         }
     }
 }
