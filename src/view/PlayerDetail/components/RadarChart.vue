@@ -11,8 +11,8 @@ const option = {
     radar: [
         {
             indicator: [
-                { text: 'Indicator1' },
-                { text: 'Indicator2' },
+                { text: 'Appearance' },
+                { text: 'Appearance' },
                 { text: 'Indicator3' },
                 { text: 'Indicator4' },
                 { text: 'Indicator5' }

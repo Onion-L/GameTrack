@@ -60,8 +60,8 @@ const constantRoutes = [
     redirect: "/analysis",
   },
   {
-    path: "/players/teams",
-    redirect: "/teams",
+    path: "/players/team",
+    redirect: "/team",
   },
   {
     path: "/players/matches",
