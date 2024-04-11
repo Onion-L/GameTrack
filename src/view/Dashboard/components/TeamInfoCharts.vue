@@ -13,7 +13,6 @@ const props = defineProps({
 const { PLAYER_POSITION_SHORT, normalizedRatingsByPosition } = usePlayerStore();
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
-const barSeriesDataa = ref([]);
 const lineChartContainer = ref();
 const barChartContainer = ref();
 const radarChartContainer = ref();

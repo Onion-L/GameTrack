@@ -64,6 +64,10 @@ const constantRoutes = [
     redirect: "/teams",
   },
   {
+    path: "/players/matches",
+    redirect: "/matches",
+  },
+  {
     path: "/auth",
     children: [
       {

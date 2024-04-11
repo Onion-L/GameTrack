@@ -7,6 +7,7 @@ export const usePlayerStore = defineStore("player", {
       PLAYER_POSITION: ["GOALKEEPERS", "DEFENDERS", "MIDFIELDERS", "FORWARDS"],
       PLAYER_POSITION_SHORT: ["GK", "DEF", "MD", "FW"],
       player_data: [],
+      normalizedRating: {},
     };
   },
   getters: {
@@ -102,7 +103,7 @@ export const usePlayerStore = defineStore("player", {
           };
         });
       }
-
+      state.normalizedRating = normalizedRatings;
       let data = [];
       for (const position in normalizedRatings) {
         let maxValue = 0;
