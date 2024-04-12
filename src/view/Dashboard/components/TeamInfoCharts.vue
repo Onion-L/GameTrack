@@ -24,7 +24,7 @@ let lineChart, barChart, radarChart;
 const barSeriesData = normalizedRatingsByPosition;
 const radarSeriesData = [
     { value: [summaryData.averagePossession, summaryData.averagePassNum, summaryData.totalGoals, summaryData.averageShortOnTarget, summaryData.averagePassAccuracy, summaryData.averageYellowCards], name: 'Team' },
-    { value: [45, 450, 9, 8, 78, 14], name: 'League Average' }
+    { value: [45, 450, 15, 8, 78, 14], name: 'League Average' }
 ];
 
 // Line chart configuration
