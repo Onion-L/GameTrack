@@ -4,6 +4,7 @@ import $http from "../utils/http";
 export const useMatchStore = defineStore("match", {
   state: () => ({
     matchData: [],
+    summaryData: {},
     seasonDate: [
       "Aug",
       "Sep",
@@ -38,7 +39,6 @@ export const useMatchStore = defineStore("match", {
 
       const monthlyRate = Object.keys(monthlyStats).map((statsKey) => {
         const { wins, total } = monthlyStats[statsKey];
-        console.log(wins, total);
         return parseFloat(((wins / total) * 100).toFixed(1));
       });
       return monthlyRate;
@@ -75,6 +75,7 @@ export const useMatchStore = defineStore("match", {
       });
 
       this.matchData = response.data.match;
+      this.summaryData = response.data.summary;
     },
   },
   persist: {

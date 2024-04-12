@@ -66,7 +66,7 @@ const initChart = (chart) => {
     window.onresize = function () {
         myChart.resize();
     }
-}
+};
 </script>
 
 <template>

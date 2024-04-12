@@ -86,9 +86,10 @@ export default class ChartOption {
       ],
     };
   }
-  getRadarOption(indicator, chartData) {
+
+  getRadarOption(indicator, chartData, averageValue) {
     return {
-      color: ["#67F9D8", "#FFE434"],
+      color: ["#FFE434", "#67F9D8"],
 
       legend: {},
       radar: [
@@ -133,11 +134,11 @@ export default class ChartOption {
           data: [
             {
               value: chartData,
-              name: "Data A",
+              name: "Player Data",
             },
             {
-              value: [6, 5, 3, 10, 15],
-              name: "Data B",
+              value: averageValue,
+              name: "Average Data",
               areaStyle: {
                 color: "rgba(255, 228, 52, 0.6)",
               },

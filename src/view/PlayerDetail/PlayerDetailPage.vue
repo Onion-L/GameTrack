@@ -10,25 +10,25 @@ import * as echarts from 'echarts';
 const route = useRoute();
 const { id } = route.params;
 
-const { player_data, normalizedRating } = usePlayerStore();
+const { player_data, normalizedRating, playerIndicators, averageData } = usePlayerStore();
 const { stats } = player_data[id];
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
+
+const forward = [{ text: 'Appearance', key: 'appearance' },
+{ text: 'Goal' },
+{ text: 'Shot On Target' },
+{ text: 'Dribble Success' },
+{ text: 'Offsides' }]
 
 const gauge = ref();
 const radar = ref();
 let radarChart;
 let gaugeChart;
 let chartOption;
-const starValue = ref(3);
+const starValue = ref(2.5);
 const contributeRating = ref(0);
-const indicatorList = ref([
-    { text: 'Appearance' },
-    { text: 'Appearance' },
-    { text: 'Indicator3' },
-    { text: 'Indicator4' },
-    { text: 'Indicator5' }
-]);
+const indicatorList = ref([]);
 
 onMounted(() => {
     sideStatus.value = true;
@@ -38,12 +38,19 @@ onMounted(() => {
             contributeRating.value = player.normalizedRating * 0.01;
         }
     });
+    indicatorList.value = playerIndicators[playerKey];
+    console.log(playerKey);
     chartOption = new ChartOption();
 });
 
 nextTick(() => {
+    const playerKey = `${player_data[id].position.toUpperCase()}S`;
+    starValue.value = Math.round(contributeRating.value * 5);
     const gaugeOption = chartOption.getGaugeOption(contributeRating.value);
-    const radarOption = chartOption.getRadarOption(indicatorList.value, [1, 2, 3, 4]);
+    const value = playerIndicators[playerKey].map(indicator => {
+        return player_data[id].stats[indicator.key];
+    })
+    const radarOption = chartOption.getRadarOption(indicatorList.value, value, averageData[playerKey]);
     gaugeChart = echarts.init(gauge.value);
     gaugeChart.setOption(gaugeOption);
     radarChart = echarts.init(radar.value);

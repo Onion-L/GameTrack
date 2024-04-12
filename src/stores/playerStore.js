@@ -8,6 +8,42 @@ export const usePlayerStore = defineStore("player", {
       PLAYER_POSITION_SHORT: ["GK", "DEF", "MD", "FW"],
       player_data: [],
       normalizedRating: {},
+      averageData: {
+        GOALKEEPERS: [5, 4, 98, 261, 6],
+        DEFENDERS: [5, 98, 5, 2, 4],
+        MIDFIELDERS: [5, 3, 4, 98, 31],
+        FORWARDS: [5, 3, 18, 5, 3],
+      },
+      playerIndicators: {
+        GOALKEEPERS: [
+          { text: "Appearance", key: "appearance" },
+          { text: "Save", key: "save" },
+          { text: "Pass Accuracy", key: "pass_accuracy" },
+          { text: "Pass", key: "passes" },
+          { text: "Lose Possession", key: "lose_possession" },
+        ],
+        DEFENDERS: [
+          { text: "Appearance", key: "appearance" },
+          { text: "Pass", key: "passes" },
+          { text: "Tackles", key: "tackle" },
+          { text: "Cleanrances", key: "clearance" },
+          { text: "Foul", key: "fouls" },
+        ],
+        MIDFIELDERS: [
+          { text: "Appearance", key: "appearance" },
+          { text: "Goal", key: "goals" },
+          { text: "Assist", key: "assist" },
+          { text: "Key Pass", key: "key_pass" },
+          { text: "Lose Possession", key: "lose_possession" },
+        ],
+        FORWARDS: [
+          { text: "Appearance", key: "appearance" },
+          { text: "Goal", key: "goals" },
+          { text: "Shot On Target", key: "shots_on_target" },
+          { text: "Dribble Success", key: "dribble_success" },
+          { text: "Offsides", key: "offsides" },
+        ],
+      },
     };
   },
   getters: {
@@ -33,6 +69,7 @@ export const usePlayerStore = defineStore("player", {
 
       return counts;
     },
+
     playersByPosition: (state) => {
       const positions = {
         GOALKEEPERS: [],
@@ -92,8 +129,6 @@ export const usePlayerStore = defineStore("player", {
       // 归一化处理
       for (const position in positions) {
         normalizedRatings[position] = positions[position].map((player) => {
-          console.log("p", player.stats.rating, "m", maxRating);
-
           return {
             name: player.name,
             normalizedRating: Math.round(
@@ -111,7 +146,6 @@ export const usePlayerStore = defineStore("player", {
           if (playerRating.normalizedRating > maxValue)
             maxValue = playerRating.normalizedRating;
         });
-        console.log(position, maxValue);
         data.push(maxValue);
       }
 

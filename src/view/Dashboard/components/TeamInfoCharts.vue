@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue'
 import { useAppStore } from "../../../stores/appStore.js";
 import { storeToRefs } from 'pinia';
 import { usePlayerStore } from "../../../stores/playerStore.js";
+import { useMatchStore } from '../../../stores/matchStore';
 
 const props = defineProps({
     monthlyGoals: Array,
@@ -11,6 +12,7 @@ const props = defineProps({
 });
 
 const { PLAYER_POSITION_SHORT, normalizedRatingsByPosition } = usePlayerStore();
+const { summaryData } = useMatchStore();
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
 const lineChartContainer = ref();
@@ -21,8 +23,8 @@ let lineChart, barChart, radarChart;
 // Mock data for illustration
 const barSeriesData = normalizedRatingsByPosition;
 const radarSeriesData = [
-    { value: [4300, 10000, 28000, 35000, 50000, 19000], name: 'Allocated Budget' },
-    { value: [5000, 14000, 28000, 31000, 42000, 21000], name: 'Actual Spending' }
+    { value: [summaryData.averagePossession, summaryData.averagePassNum, summaryData.totalGoals, summaryData.averageShortOnTarget, summaryData.averagePassAccuracy, summaryData.averageYellowCards], name: 'Team' },
+    { value: [45, 450, 9, 8, 78, 14], name: 'League Average' }
 ];
 
 // Line chart configuration
@@ -93,12 +95,12 @@ const radarChartOption = {
             }
         },
         indicator: [
-            { name: 'Ball Control', max: 6500 },
-            { name: 'Passing', max: 16000 },
-            { name: 'Attack', max: 30000 },
-            { name: 'Defense', max: 38000 },
-            { name: 'Stamina', max: 52000 },
-            { name: 'Speed', max: 25000 }
+            { name: 'Ball Control' },
+            { name: 'Passing' },
+            { name: 'Attack' },
+            { name: 'Defense' },
+            { name: 'Dribble' },
+            { name: 'Save' }
         ]
     },
     series: [{

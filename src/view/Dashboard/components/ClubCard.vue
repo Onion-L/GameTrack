@@ -2,7 +2,11 @@
 import { usePlayerStore } from '../../../stores/playerStore';
 
 const { playerCounts } = usePlayerStore();
-const props = defineProps(['Position', 'index'])
+const props = defineProps(['Position', 'index']);
+onMounted(() => {
+  console.log(123123123, playerCounts);
+  console.log(props.Position);
+});
 </script>
 
 <template>
@@ -63,4 +67,3 @@ const props = defineProps(['Position', 'index'])
 
 }
 </style>
-  
