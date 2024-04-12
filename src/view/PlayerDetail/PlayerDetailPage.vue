@@ -9,17 +9,10 @@ import * as echarts from 'echarts';
 
 const route = useRoute();
 const { id } = route.params;
-
 const { player_data, normalizedRating, playerIndicators, averageData } = usePlayerStore();
 const { stats } = player_data[id];
 const appStore = useAppStore();
 const { sideStatus } = storeToRefs(appStore);
-
-const forward = [{ text: 'Appearance', key: 'appearance' },
-{ text: 'Goal' },
-{ text: 'Shot On Target' },
-{ text: 'Dribble Success' },
-{ text: 'Offsides' }]
 
 const gauge = ref();
 const radar = ref();

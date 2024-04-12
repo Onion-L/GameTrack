@@ -92,13 +92,12 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: constantRoutes,
 });
-
 router.beforeEach((to, from, next) => {
-  if (
-    !(to.name === "Register" || to.name === "Login") &&
-    !localStorage.getItem("gt-user")
-  ) {
-    next({ path: "/auth/login" });
+  const isAuthenticated = localStorage.getItem("gt-user");
+  const publicPages = ["Login", "Register"];
+  const authRequired = !publicPages.includes(to.name);
+  if (authRequired && !isAuthenticated) {
+    next({ name: "Login" });
   } else {
     next();
   }

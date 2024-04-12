@@ -4,9 +4,10 @@ import { usePlayerStore } from "../../stores/playerStore.js";
 
 const { playersByPosition } = usePlayerStore();
 const router = useRouter();
+
 const goToTragetRoute = (id) => {
   router.push(`/players/${id}`);
-}
+};
 </script>
 
 <template>
