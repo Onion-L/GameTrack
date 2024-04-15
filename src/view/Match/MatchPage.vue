@@ -30,11 +30,7 @@ const matchForm = reactive({
 });
 
 onMounted(() => {
-    $http.get('/api/matches', {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("gt-user")}`,
-        },
-    }).then(response => {
+    $http.get('/api/matches').then(response => {
         matchResult.value = response.data.match;
         for (const key in response.data.summary) {
             if (statsValue.hasOwnProperty(key)) {

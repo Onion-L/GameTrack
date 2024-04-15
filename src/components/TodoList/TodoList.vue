@@ -22,7 +22,7 @@ const addTask = () => {
   taskForm.user = localStorage.getItem('gt-username');
   console.log(taskForm);
   dialogFormVisible.value = false;
-  $http.post('api/tasks', taskForm).then(response => {
+  $http.post('/api/tasks', taskForm).then(response => {
     ElMessage({
       message: response.data.message,
       type: 'success',
@@ -32,19 +32,24 @@ const addTask = () => {
   }).catch(error => {
     console.error(error);
     ElMessage({
-      message: error,
+      message: error.response.data.message,
       type: 'error',
     })
   })
 };
 
 const handleChecked = (task) => {
-  console.log(task);
   $http.put('/api/tasks', task).then(response => {
     ElMessage({
       message: response.data.message,
       type: 'success',
     });
+  }).catch(error => {
+    console.error(error);
+    ElMessage({
+      message: error.response.data.message,
+      type: 'error',
+    })
   })
 }
 
@@ -59,7 +64,6 @@ const deleteTask = (t) => {
       type: 'warning',
     }
   ).then(_ => {
-    console.log(t._id);
     $http.delete(`/api/tasks?id=${t._id}`).then(response => {
       ElMessage({
         message: response.data.message,
@@ -67,6 +71,11 @@ const deleteTask = (t) => {
       });
     }).then(_ => {
       dataStore.taskListDelete(t._id);
+    }).catch(error => {
+      ElMessage({
+        message: error.response.data.message,
+        type: 'error',
+      });
     })
   })
 };

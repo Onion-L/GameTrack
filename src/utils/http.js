@@ -8,6 +8,10 @@ const http = axios.create({
 
 http.interceptors.request.use(
   (config) => {
+    const token = localStorage.getItem("gt-user");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
@@ -16,8 +20,16 @@ http.interceptors.request.use(
 );
 
 http.interceptors.response.use(
-  (config) => {
-    return config;
+  (response) => {
+    const newToken = response.config.headers["Authorization"];
+    console.log(123123123, response.config.headers["Authorization"]);
+
+    if (newToken) {
+      const token = newToken.split(" ")[1];
+      localStorage.setItem("gt-user", token);
+    }
+
+    return response;
   },
   (error) => {
     return Promise.reject(error);

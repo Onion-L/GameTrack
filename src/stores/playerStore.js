@@ -154,11 +154,7 @@ export const usePlayerStore = defineStore("player", {
   },
   actions: {
     async fetchPlayerData() {
-      const response = await $http.get("/api/players", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("gt-user")}`,
-        },
-      });
+      const response = await $http.get("/api/players");
       this.player_data = response.data;
     },
   },

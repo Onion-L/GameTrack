@@ -14,11 +14,7 @@ export const useDataStore = defineStore("data", {
       this.taskList = this.taskList.filter((t) => t._id !== id);
     },
     async fetchTasksData() {
-      const response = await $http.get("/api/tasks", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("gt-user")}`,
-        },
-      });
+      const response = await $http.get("/api/tasks");
       console.log(response);
       this.taskList = response.data;
     },

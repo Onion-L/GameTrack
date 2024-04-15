@@ -9,7 +9,6 @@ const formInfoData = reactive({
   username: '',
   password: '',
 });
-const userStored = ref(false);
 
 const rules = reactive({
   username: [{ required: true, message: 'Please provide a username', trigger: 'blur' }],
@@ -22,7 +21,7 @@ const rules = reactive({
 });
 
 const loginHandle = () => {
-  props.submitHandle(formInfoData, userStored.value);
+  props.submitHandle(formInfoData);
 };
 
 const registerLink = () => {
@@ -37,9 +36,6 @@ const registerLink = () => {
     </el-form-item>
     <el-form-item prop="password">
       <el-input type="password" v-model="formInfoData.password" placeholder="Password" />
-    </el-form-item>
-    <el-form-item>
-      <el-checkbox v-model="userStored">Remember me</el-checkbox>
     </el-form-item>
     <div class="btn-container">
       <el-button type="primary" @click="loginHandle">Sign In</el-button>

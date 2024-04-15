@@ -68,11 +68,7 @@ export const useMatchStore = defineStore("match", {
   },
   actions: {
     async fetchMatchData() {
-      const response = await $http.get("/api/matches", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("gt-user")}`,
-        },
-      });
+      const response = await $http.get("/api/matches");
 
       this.matchData = response.data.match;
       this.summaryData = response.data.summary;

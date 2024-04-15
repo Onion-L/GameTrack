@@ -18,10 +18,10 @@ onMounted(() => {
   localStorage.clear();
 });
 
-const submitHandle = (formData, userStored) => {
+const submitHandle = (formData) => {
   isError.value = false;
   errorMessage.value = "";
-  $http.post('/auth/login', { ...formData, isRemembered: userStored })
+  $http.post('/auth/login', formData)
     .then(response => {
       if (localStorage.getItem("gt-user")) {
         localStorage.clear();
