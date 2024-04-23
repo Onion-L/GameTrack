@@ -114,7 +114,7 @@ const registerHandle = (formEl, registerInfo) => {
     flex-direction: column;
     align-items: center;
     padding-top: 5%;
-    background-image: url('../../assets/images/register-background.webp');
+    background-image: url('../../assets/images/register-background.jpg');
     background-position: center;
     background-size: cover;
 }

@@ -29,9 +29,6 @@ const handleLogOut = () => {
     @select="handleSelect" router>
     <Hamburger :isCollapse="sideStatus" @click="toggleIcon" />
     <div class="flex-grow"></div>
-    <el-menu-item>
-      <img style="width: 32px;" src="../../../assets/images/github-mark.svg" alt="github" />
-    </el-menu-item>
     <el-sub-menu>
       <template #title>
         <img style="width: 32px;" src="../../../assets/images/user.png" alt="profile" />

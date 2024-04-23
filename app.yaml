@@ -1,0 +1,10 @@
+runtime: nodejs18
+service: default
+
+handlers:
+- url: /(.*\.(gif|png|jpg|css|js))$
+  static_files: dist/\1
+  upload: dist/(.*\.(gif|png|jpg|css|js))$
+- url: /.*
+  static_files: dist/index.html
+  upload: dist/index.html

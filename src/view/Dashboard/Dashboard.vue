@@ -8,11 +8,8 @@ import { usePlayerStore } from "../../stores/playerStore.js";
 import { useMatchStore } from "../../stores/matchStore.js";
 
 const { PLAYER_POSITION } = usePlayerStore();
-const { fetchMatchData, winRateByMonth, totalGoalByMonth, seasonDate } = useMatchStore();
+const { winRateByMonth, totalGoalByMonth, seasonDate } = useMatchStore();
 
-onMounted(() => {
-  fetchMatchData();
-});
 </script>
 
 <template>

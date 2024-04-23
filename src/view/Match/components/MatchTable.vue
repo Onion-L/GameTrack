@@ -1,6 +1,8 @@
 <script setup>
 import $http from "../../../utils/http.js";
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { useMatchStore } from "../../../stores/matchStore";
+
 
 const props = defineProps({
     loading: Boolean,
@@ -10,6 +12,7 @@ const props = defineProps({
 const dialogVisible = ref(false);
 const statsResult = ref({});
 const statsKey = ref([]);
+const { fetchMatchData } = useMatchStore();
 
 const checkDetail = (row) => {
     console.log(row);
@@ -35,6 +38,7 @@ const handleDelete = (row) => {
                 type: 'success',
             });
         }).then(_ => {
+            fetchMatchData();
             setTimeout(() => {
                 window.location.reload();
             }, 2000);

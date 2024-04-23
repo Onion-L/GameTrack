@@ -87,7 +87,7 @@ nextTick(() => {
 .player-detail_header {
     display: flex;
     width: 100%;
-    background-color: #3232321c;
+    background-color: #ffffff1c;
     padding: 0 20px;
 
     .player-detail-content {
@@ -151,7 +151,7 @@ nextTick(() => {
 .match-stats {
     .stats-header {
         font-size: 40px;
-        color: #717171;
+        color: #8d8d8d;
     }
 
     hr {

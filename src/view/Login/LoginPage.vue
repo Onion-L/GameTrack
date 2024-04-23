@@ -39,7 +39,7 @@ const submitHandle = (formData) => {
     .catch(error => {
       isError.value = true;
       errorMessage.value = error.response.data.message;
-      console.error(error.response.data.message);
+      console.error(error.response);
     });
 };
 </script>

@@ -22,8 +22,6 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response) => {
     const newToken = response.config.headers["Authorization"];
-    console.log(123123123, response.config.headers["Authorization"]);
-
     if (newToken) {
       const token = newToken.split(" ")[1];
       localStorage.setItem("gt-user", token);

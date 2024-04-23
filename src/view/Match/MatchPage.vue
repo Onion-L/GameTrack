@@ -3,12 +3,14 @@ import $http from "../../utils/http.js";
 import MatchStatistics from './components/MatchStatistics.vue';
 import MatchTable from './components/MatchTable.vue';
 import { DocumentAdd } from '@element-plus/icons-vue';
+import { useMatchStore } from "../../stores/matchStore";
 
 const loading = ref(false);
 const matchResult = ref([]);
 const dialogFormVisible = ref(false);
 const uploadRef = ref();
 const formLabelWidth = '60px';
+const { fetchMatchData } = useMatchStore();
 const formData = new FormData();
 
 const statsValue = reactive({
@@ -61,7 +63,10 @@ const handleSubmit = () => {
             type: 'success',
         });
     }).then(_ => {
-        window.location.reload();
+        fetchMatchData();
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
     }).catch(error => {
         ElMessage({
             message: error.response.message,

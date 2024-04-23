@@ -80,7 +80,7 @@ const determineColor = (player1Stat, player2Stat) => {
     </div>
     <div class="analysis-wrap">
       <div class="analysis-content" v-for="key in analysis_key" :key="key.name">
-        <template v-if="player1_value.stats[key.name] !== 0 || player1_value.stats[key.name] !== 0">
+        <template v-if="player1_value.stats[key.name] !== 0 || player2_value.stats[key.name] !== 0">
           <div class="progress-container">
             <el-progress :percentage="getNormalizedValue(player1_value, key.name)"
               :color="determineColor(player1_value.stats[key.name], player2_value.stats[key.name])"
